@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class PushBox
 {
+    private float _ratio = 10;
+    private float _maxPushForce = 0;
+    private float _pushForce = 0;
     private bool _isPushable = false;
     private RaycastHit _hitInfo = default;
 
-    public PushBox(){ }
+    public PushBox(float maxPushForce)
+    {
+        _maxPushForce = maxPushForce;
+        _pushForce = _maxPushForce / _ratio;
+    }
 
     public void PlayerPushing(Vector3 playerPos, float xLocalScal)
     {
@@ -15,14 +22,16 @@ public class PushBox
         {
             Rigidbody boxRig = _hitInfo.rigidbody;
             boxRig.isKinematic = false;
-            boxRig.AddForce(new Vector3(10,0,0),ForceMode.Impulse);
+            boxRig.AddForce(new Vector3(_pushForce * -xLocalScal,0,0),ForceMode.Impulse);
         }
     }
 
     private bool PushableChecker(Vector3 playerPos, float xLocalScal)
     {
         Vector3 origin = playerPos;
-        float maxRayDistans = 0.5f;
+        
+        float maxRayDistans = 0.7f;
+
         Ray ray = default;
 
         if (xLocalScal > 0)
@@ -44,6 +53,8 @@ public class PushBox
         {
             _isPushable = false;
         }
+
+        //Debug.Log(_isPushable);
 
         return _isPushable;
 

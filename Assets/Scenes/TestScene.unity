@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 295993422}
   - component: {fileID: 295993421}
   - component: {fileID: 295993420}
+  - component: {fileID: 295993425}
   - component: {fileID: 295993419}
   - component: {fileID: 295993424}
-  - component: {fileID: 295993425}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _jumpForce: 7.5
+  _maxPushForce: 0
 --- !u!1 &868055962
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +494,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
@@ -577,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 1294679156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -1.5, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
