@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerJump
 {
-    private float _jumpForce = 0;
     private Rigidbody _playerRigidbody = default;
+    private float _jumpForce = 0;
+    private bool _isGround = true;
 
     public PlayerJump(Rigidbody playerRigidbody, float jumpForce)
     {
@@ -13,11 +14,29 @@ public class PlayerJump
         _playerRigidbody = playerRigidbody;
     }
 
-    public void PlayerJumping()
+    public void PlayerJumping(Vector3 playerPos)
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        Vector3 origin = playerPos;
+        float maxRayDistans = 1f;
+
+        Ray ray = new Ray(origin,Vector3.down);
+
+        RaycastHit hitInfo = default;
+
+        Debug.DrawRay(origin, Vector3.down * maxRayDistans, Color.red);
+
+        if(Physics.Raycast(ray, out hitInfo, maxRayDistans))
         {
-            //Ç±Ç±Ç…ÉWÉÉÉìÉvÇÃèàóùaddforceÇégÇ§ó\íË
+            _isGround = true;
+        }
+        else
+        {
+            _isGround = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && _isGround)
+        {
+            _playerRigidbody.AddForce(0, _jumpForce, 0, ForceMode.Impulse);
         }
     }
 }

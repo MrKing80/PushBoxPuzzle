@@ -20,6 +20,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _playerMove.PlayerMovement();
-        _playerJump.PlayerJumping();
+        _playerJump.PlayerJumping(this.transform.position);
     }
 }
