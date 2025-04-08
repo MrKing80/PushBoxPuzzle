@@ -7,6 +7,7 @@ public class PlayerJump
     private Rigidbody _playerRigidbody = default;
     private float _jumpForce = 0;
     private bool _isGround = true;
+    private RaycastHit _hitInfo = default;
 
     public PlayerJump(Rigidbody playerRigidbody, float jumpForce)
     {
@@ -21,11 +22,9 @@ public class PlayerJump
 
         Ray ray = new Ray(origin,Vector3.down);
 
-        RaycastHit hitInfo = default;
-
         Debug.DrawRay(origin, Vector3.down * maxRayDistans, Color.red);
 
-        if(Physics.Raycast(ray, out hitInfo, maxRayDistans))
+        if(Physics.Raycast(ray, out _hitInfo, maxRayDistans))
         {
             _isGround = true;
         }

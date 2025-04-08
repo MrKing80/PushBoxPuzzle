@@ -16,12 +16,9 @@ public class PlayerMove
     /// <summary>
     /// プレイヤーの移動
     /// </summary>
-    /// <param name="playerRidigbody">プレイヤーのRigidbody</param>
-    public void PlayerMovement()
+    public float PlayerMovement()
     {
         float moveDirection = Input.GetAxisRaw("Horizontal");
-
-        Debug.Log(moveDirection);
 
         if(moveDirection == 0)
         {
@@ -31,5 +28,7 @@ public class PlayerMove
         {
             _playerRigidbody.velocity = new Vector3(moveDirection * _moveSpeed, _playerRigidbody.velocity.y,0);
         }
+
+        return moveDirection;
     }
 }
