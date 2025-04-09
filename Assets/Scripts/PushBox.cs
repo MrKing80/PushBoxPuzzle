@@ -6,24 +6,53 @@ public class PushBox
 {
     private float _ratio = 10;
     private float _maxPushForce = 0;
-    private float _pushForce = 0;
+    private float _minPushForce = 0;
+    private float _currentPushForce = 0;
+    private float _interval = 0.5f;
+    private float _timer = 0;
     private bool _isPushable = false;
     private RaycastHit _hitInfo = default;
 
     public PushBox(float maxPushForce)
     {
         _maxPushForce = maxPushForce;
-        _pushForce = _maxPushForce / _ratio;
+        _minPushForce = _maxPushForce / _ratio;
     }
 
     public void PlayerPushing(Vector3 playerPos, float xLocalScal)
     {
-        if (PushableChecker(playerPos,xLocalScal) && Input.GetKeyDown(KeyCode.Space))
+        if (PushableChecker(playerPos,xLocalScal) && Input.GetKey(KeyCode.Space))
+        {
+
+            _timer += Time.deltaTime;
+
+            if(_timer >= _interval)
+            {
+                if (_currentPushForce >= _maxPushForce)
+                {
+                    _currentPushForce = _minPushForce;
+                }
+
+                _currentPushForce += _minPushForce;
+
+                _timer = 0;
+
+                Debug.Log(_currentPushForce);
+
+            }
+
+        }
+
+        if (PushableChecker(playerPos, xLocalScal) && Input.GetKeyUp(KeyCode.Space))
         {
             Rigidbody boxRig = _hitInfo.rigidbody;
             boxRig.isKinematic = false;
-            boxRig.AddForce(new Vector3(_pushForce * -xLocalScal,0,0),ForceMode.Impulse);
+            boxRig.AddForce(new Vector3(_currentPushForce * -xLocalScal, 0, 0), ForceMode.Impulse);
+
+            _currentPushForce = 0;
+
         }
+
     }
 
     private bool PushableChecker(Vector3 playerPos, float xLocalScal)

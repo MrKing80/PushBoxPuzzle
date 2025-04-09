@@ -274,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _jumpForce: 7.5
-  _maxPushForce: 0
+  _maxPushForce: 20
 --- !u!1 &868055962
 GameObject:
   m_ObjectHideFlags: 0
