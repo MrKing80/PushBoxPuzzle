@@ -30,7 +30,7 @@ public class PlayerJump
     /// <param name="playerPos">プレイヤーの位置</param>
     public void PlayerJumping(Vector3 playerPos)
     {
-        float maxRayDistans = 1f;                           // レイの射出距離
+        float maxRayDistans = 0.1f;                           // レイの射出距離
         Ray ray = new Ray(playerPos, Vector3.down);         //レイを飛ばす
 
         Debug.DrawRay(playerPos, Vector3.down * maxRayDistans, Color.red);      // レイを描画する

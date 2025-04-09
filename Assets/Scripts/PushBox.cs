@@ -30,11 +30,11 @@ public class PushBox
     /// プレイヤーが箱を押し出す処理
     /// </summary>
     /// <param name="playerPos">プレイヤーのポジション</param>
-    /// <param name="xLocalScal">プレイヤーのX軸のローカルスケール</param>
-    public void PlayerPushing(Vector3 playerPos, float xLocalScal)
+    /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
+    public void PlayerPushing(Vector3 playerPos, float zLocalScal)
     {
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
-        if (PushableChecker(playerPos,xLocalScal) && Input.GetKey(KeyCode.Space))
+        if (PushableChecker(playerPos,zLocalScal) && Input.GetKey(KeyCode.Space))
         {
             //時間を計測
             _timer += Time.deltaTime;
@@ -61,7 +61,7 @@ public class PushBox
         }
 
         //押すことが可能な状態かつ、スペースキーから指が離れたら処理を行う
-        if (PushableChecker(playerPos, xLocalScal) && Input.GetKeyUp(KeyCode.Space))
+        if (PushableChecker(playerPos, zLocalScal) && Input.GetKeyUp(KeyCode.Space))
         {
             //レイがヒットしたオブジェクトのRigidbodyを取得
             Rigidbody boxRig = _hitInfo.rigidbody;
@@ -70,7 +70,7 @@ public class PushBox
             boxRig.isKinematic = false;
 
             //箱に力を加えて動かす
-            boxRig.AddForce(new Vector3(_currentPushForce * -xLocalScal, 0, 0), ForceMode.Impulse);
+            boxRig.AddForce(new Vector3(_currentPushForce * zLocalScal, 0, 0), ForceMode.Impulse);
 
             //押す力をリセット
             _currentPushForce = 0;
@@ -84,25 +84,25 @@ public class PushBox
     /// ※レイの範囲内に箱があれば押せると判断する
     /// </summary>
     /// <param name="playerPos">プレイヤーのポジション</param>
-    /// <param name="xLocalScal">プレイヤーのX軸のローカルスケール</param>
+    /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
     /// <returns>trueならば箱を押すことが可能、falseならば箱を押すことはできない</returns>
-    private bool PushableChecker(Vector3 playerPos, float xLocalScal)
+    private bool PushableChecker(Vector3 playerPos, float zLocalScal)
     {        
-        float maxRayDistans = 0.7f;         //レイの射出距離
+        float maxRayDistans = 0.5f;         //レイの射出距離
         Ray ray = default;
 
         //プレイヤーの向きに応じてレイの射出方向を変える
-        if (xLocalScal > 0)
+        if (zLocalScal < 0)
         {
             ray = new Ray(playerPos, Vector3.left);     //左方向
         }
-        else if (xLocalScal < 0)
+        else if (zLocalScal > 0)
         {
             ray = new Ray(playerPos, Vector3.right);    //右方向
         }
 
         //レイを描画する
-        Debug.DrawRay(playerPos, Vector3.left * maxRayDistans * xLocalScal, Color.red);
+        Debug.DrawRay(playerPos, Vector3.right * maxRayDistans * zLocalScal, Color.red);
 
         //レイがヒットしていればtrueを返すそうでなければfalseを返す
         if (Physics.Raycast(ray, out _hitInfo, maxRayDistans))
