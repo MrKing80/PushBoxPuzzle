@@ -12,15 +12,16 @@ public class PushBox
     private float _timer = 0;                   // 時間を計測する変数
     private bool _isPushable = false;           // 箱を押すことができるかどうか
     private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
-
+    private LayerMask _boxLayer = default;
 
     /// <summary>
     /// PushBoxのコンストラクタ
     /// 箱を押す力の最大値を最小値を決める
     /// </summary>
     /// <param name="maxPushForce">PlayerControllerから受け取った押す力の最大値</param>
-    public PushBox(float maxPushForce)
+    public PushBox(float maxPushForce, LayerMask boxLayer)
     {
+        _boxLayer = boxLayer;
         _maxPushForce = maxPushForce;
         _minPushForce = _maxPushForce / _ratio;
     }
@@ -105,7 +106,7 @@ public class PushBox
         Debug.DrawRay(playerPos, Vector3.right * maxRayDistans * zLocalScal, Color.red);
 
         //レイがヒットしていればtrueを返すそうでなければfalseを返す
-        if (Physics.Raycast(ray, out _hitInfo, maxRayDistans))
+        if (Physics.Raycast(ray, out _hitInfo, maxRayDistans, _boxLayer))
         {
             _isPushable = true;
         }

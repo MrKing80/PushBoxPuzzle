@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce = 0;      // ジャンプ力
     [SerializeField] private float _maxPushForce = 0;   // 箱を押し出す最大の力
 
+    [SerializeField] private LayerMask _boxLayer = default;
+
     private float _moveDirection = 0;                   // 移動方向
 
     private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerMove = new PlayerMove(this.GetComponent<Rigidbody>(), _moveSpeed);   // 移動クラスを初期化
         _playerJump = new PlayerJump(this.GetComponent<Rigidbody>(), _jumpForce);   // ジャンプクラスを初期化
-        _pushBox = new PushBox(_maxPushForce);                                      // 箱を押し出すクラスを初期化
+        _pushBox = new PushBox(_maxPushForce, _boxLayer);                                      // 箱を押し出すクラスを初期化
 
         _zLocalScale = transform.localScale.z;                                      // プレイヤーのX軸のローカルスケールを取得
         _invertedZLocalScale = transform.localScale.z * INVERTED_ORIENTATION;       // プレイヤーのX軸のローカルスケールを取得し反転処理を行う
