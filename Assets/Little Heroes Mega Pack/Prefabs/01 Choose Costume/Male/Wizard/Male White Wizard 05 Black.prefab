@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 8700398839844484316}
   m_Layer: 7
   m_Name: Male White Wizard 05 Black
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
