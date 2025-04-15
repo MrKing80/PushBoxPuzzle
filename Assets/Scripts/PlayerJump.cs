@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -30,8 +28,8 @@ public class PlayerJump
     /// <param name="playerPos">プレイヤーの位置</param>
     public void PlayerJumping(Vector3 playerPos)
     {
-        float maxRayDistans = 0.1f;                           // レイの射出距離
-        Ray ray = new Ray(playerPos, Vector3.down);         //レイを飛ばす
+        float maxRayDistans = 0.1f;                             // レイの射出距離
+        Ray ray = new Ray(playerPos, Vector3.down);             //レイを飛ばす
 
         Debug.DrawRay(playerPos, Vector3.down * maxRayDistans, Color.red);      // レイを描画する
 

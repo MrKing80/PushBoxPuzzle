@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,22 +6,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("プレイヤーの挙動に関するステータス")]
-    [SerializeField] private float _moveSpeed = 0;      // 移動速度
-    [SerializeField] private float _jumpForce = 0;      // ジャンプ力
-    [SerializeField] private float _maxPushForce = 0;   // 箱を押し出す最大の力
+    [SerializeField] private float _moveSpeed = 0;          // 移動速度
+    [SerializeField] private float _jumpForce = 0;          // ジャンプ力
+    [SerializeField] private float _maxPushForce = 0;       // 箱を押し出す最大の力
 
-    [SerializeField] private LayerMask _boxLayer = default;
+    [SerializeField] private LayerMask _boxLayer = default; //レイが衝突するレイヤー
 
-    private float _moveDirection = 0;                   // 移動方向
+    private float _moveDirection = 0;                       // 移動方向
 
-    private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
-    
-    private float _zLocalScale = 0;                     // プレイヤーのX軸のローカルスケール
-    private float _invertedZLocalScale = 0;             // 反転時のプレイヤーのX軸のローカルスケール
-    
-    private PlayerMove _playerMove = default;           // プレイヤーの移動に関するクラス
-    private PlayerJump _playerJump = default;           // プレイヤーのジャンプに関するクラス
-    private PushBox _pushBox = default;                 // プレイヤーの箱を押し出す挙動に関するクラス
+    private const int INVERTED_ORIENTATION = -1;            // 向きを反転する用の定数
+
+    private float _zLocalScale = 0;                         // プレイヤーのX軸のローカルスケール
+    private float _invertedZLocalScale = 0;                 // 反転時のプレイヤーのX軸のローカルスケール
+
+    private PlayerMove _playerMove = default;               // プレイヤーの移動に関するクラス
+    private PlayerJump _playerJump = default;               // プレイヤーのジャンプに関するクラス
+    private PushBox _pushBox = default;                     // プレイヤーの箱を押し出す挙動に関するクラス
 
     /// <summary>
     /// /初期化を行う

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PushBox
 {
-    private float _ratio = 10;                  // 押す力の最大値に対して最小値を決めるのに使用する値
+    private float _ratio = 5;                   // 押す力の最大値に対して最小値を決めるのに使用する値
     private float _maxPushForce = 0;            // 押す力の最大値
     private float _minPushForce = 0;            // 押す力の最小値
     private float _currentPushForce = 0;        // 現在の押す力
@@ -12,7 +10,7 @@ public class PushBox
     private float _timer = 0;                   // 時間を計測する変数
     private bool _isPushable = false;           // 箱を押すことができるかどうか
     private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
-    private LayerMask _boxLayer = default;
+    private LayerMask _boxLayer = default;      // レイがヒットするレイヤー
 
     /// <summary>
     /// PushBoxのコンストラクタ
@@ -21,11 +19,11 @@ public class PushBox
     /// <param name="maxPushForce">PlayerControllerから受け取った押す力の最大値</param>
     public PushBox(float maxPushForce, LayerMask boxLayer)
     {
-        _boxLayer = boxLayer;
-        _maxPushForce = maxPushForce;
-        _minPushForce = _maxPushForce / _ratio;
+        _boxLayer = boxLayer;                       //受け取ったレイヤーを格納
+        _maxPushForce = maxPushForce;               //受け取った力を格納
+        _minPushForce = _maxPushForce / _ratio;     //受け取った力を基に最小値を計算
+        _currentPushForce = _minPushForce;          //最小値を格納し初期化する
     }
-
 
     /// <summary>
     /// プレイヤーが箱を押し出す処理
@@ -74,10 +72,8 @@ public class PushBox
             boxRig.AddForce(new Vector3(_currentPushForce * zLocalScal, 0, 0), ForceMode.Impulse);
 
             //押す力をリセット
-            _currentPushForce = 0;
-
+            _currentPushForce = _minPushForce;
         }
-
     }
 
     /// <summary>
@@ -115,9 +111,6 @@ public class PushBox
             _isPushable = false;
         }
 
-        //Debug.Log(_isPushable);
-
         return _isPushable;
-
     }
 }
