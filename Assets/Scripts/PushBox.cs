@@ -101,7 +101,7 @@ public class PushBox
         //レイを描画する
         Debug.DrawRay(playerPos, Vector3.right * maxRayDistans * zLocalScal, Color.red);
 
-        //レイがヒットしていればtrueを返すそうでなければfalseを返す
+        //レイがヒットしていればtrueを返す、そうでなければfalseを返す
         if (Physics.Raycast(ray, out _hitInfo, maxRayDistans, _boxLayer))
         {
             _isPushable = true;

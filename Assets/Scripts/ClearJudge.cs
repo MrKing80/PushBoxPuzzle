@@ -53,7 +53,5 @@ public class ClearJudge : MonoBehaviour
         {
             _isPressed = false;
         }
-
-
     }
 }

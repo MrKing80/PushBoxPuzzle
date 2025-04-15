@@ -24,16 +24,19 @@ public class PlayerMove
     /// プレイヤーの移動の処理を行う
     /// </summary>
     public float PlayerMovement()
-    {
-        float moveDirection = Input.GetAxisRaw("Horizontal");       // キー入力を検知する
-
-        // 入力によって移動方向を変える
+    { 
+        // キー入力を検知する
+        float moveDirection = Input.GetAxisRaw("Horizontal"); 
+        
+        // プレイヤーを移動させる
         if (moveDirection == 0)
         {
+            //キー入力がなければ動かさない
             _playerRigidbody.velocity = new Vector3(0, _playerRigidbody.velocity.y, 0);
         }
         else
         {
+            //キーの入力に応じてプレイヤーを移動させる
             _playerRigidbody.velocity = new Vector3(moveDirection * _moveSpeed, _playerRigidbody.velocity.y, 0);
         }
 
