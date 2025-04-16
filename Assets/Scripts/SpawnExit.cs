@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class SpawnExit : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _switches = default;      //ステージ上に配置されたスイッチを格納する配列
-    [SerializeField] private GameObject _exitDoor = default;        //出口オブジェクトを格納する変数
+    private GameObject[] _switches = default;      //ステージ上に配置されたスイッチを格納する配列
+    private GameObject _exitDoor = default;        //出口オブジェクトを格納する変数
     private bool[] _isPresseds = default;                           //それぞれのスイッチの状態を格納する配列
     private bool _isPassedTheCheck = false;                         //すべてのスイッチが押されたかを判定する変数
     private float _waitSec = 0.5f;                                  //一定時間待機する時間を格納した変数
@@ -14,6 +14,9 @@ public class SpawnExit : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        _switches = GameObject.FindGameObjectsWithTag("ClearJudgeObject");
+        _exitDoor = GameObject.FindGameObjectWithTag("Finish");
+
         //出口を非表示にする
         _exitDoor.SetActive(false);
 

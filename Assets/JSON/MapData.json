@@ -1,0 +1,487 @@
+{
+    "list": [
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -7.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 5.0,
+                "y": -4.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 6.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 7.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 8.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "Switch",
+            "position": {
+                "x": -6.0,
+                "y": -0.4000000059604645
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -3.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -4.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -5.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -9.0,
+                "y": -6.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -6.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "Exit",
+            "position": {
+                "x": 12.5,
+                "y": -0.20000000298023225
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 3.0,
+                "y": -2.0
+            }
+        },
+        {
+            "prefabName": "Box",
+            "position": {
+                "x": -1.2000000476837159,
+                "y": 1.440000057220459
+            }
+        },
+        {
+            "prefabName": "Switch",
+            "position": {
+                "x": -12.0,
+                "y": -6.400000095367432
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -2.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -1.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 1.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 0.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 2.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 13.0,
+                "y": -2.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 12.0,
+                "y": -2.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 11.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 10.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 9.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "RigRLegPlatform",
+            "position": {
+                "x": 0.0032640891149640085,
+                "y": -0.5899999737739563
+            }
+        },
+        {
+            "prefabName": "RigRibcageGizmo",
+            "position": {
+                "x": -2.411837272120465e-7,
+                "y": 0.23920059204101563
+            }
+        },
+        {
+            "prefabName": "RigRArmPalmGizmo",
+            "position": {
+                "x": 0.00013555177429225296,
+                "y": 0.23031240701675416
+            }
+        },
+        {
+            "prefabName": "RigRArm2Gizmo",
+            "position": {
+                "x": -0.0008118712576106191,
+                "y": 0.2316640019416809
+            }
+        },
+        {
+            "prefabName": "RigRArm1Gizmo",
+            "position": {
+                "x": -2.390394797657791e-7,
+                "y": 0.23467642068862916
+            }
+        },
+        {
+            "prefabName": "RigPelvisGizmo",
+            "position": {
+                "x": -1.818345793935805e-7,
+                "y": -0.12508177757263184
+            }
+        },
+        {
+            "prefabName": "Dummy Prop Right",
+            "position": {
+                "x": 0.0000026195839382125998,
+                "y": 0.16908293962478639
+            }
+        },
+        {
+            "prefabName": "RigRArmPalm",
+            "position": {
+                "x": 0.0001356571592623368,
+                "y": 0.2303122878074646
+            }
+        },
+        {
+            "prefabName": "RigRArm2",
+            "position": {
+                "x": -0.0008117886027321219,
+                "y": 0.23166394233703614
+            }
+        },
+        {
+            "prefabName": "RigRArm1",
+            "position": {
+                "x": -1.6693340398887813e-7,
+                "y": 0.23467642068862916
+            }
+        },
+        {
+            "prefabName": "Dummy Prop Head",
+            "position": {
+                "x": 1.19666168529875e-7,
+                "y": 0.6100000739097595
+            }
+        },
+        {
+            "prefabName": "RigHead",
+            "position": {
+                "x": -1.8183462202614465e-7,
+                "y": 0.6467137932777405
+            }
+        },
+        {
+            "prefabName": "RigNeck",
+            "position": {
+                "x": -1.818345936044352e-7,
+                "y": 0.23920059204101563
+            }
+        },
+        {
+            "prefabName": "Dummy Prop Left",
+            "position": {
+                "x": 0.000003454049192441744,
+                "y": 0.16908305883407594
+            }
+        },
+        {
+            "prefabName": "RigLArmPalm",
+            "position": {
+                "x": 0.000135537949972786,
+                "y": 0.23031234741210938
+            }
+        },
+        {
+            "prefabName": "RigLArm2",
+            "position": {
+                "x": -0.0008119078120216727,
+                "y": 0.23166388273239137
+            }
+        },
+        {
+            "prefabName": "RigLArm1",
+            "position": {
+                "x": -1.9673574058742816e-7,
+                "y": 0.23467642068862916
+            }
+        },
+        {
+            "prefabName": "Dummy Prop Back",
+            "position": {
+                "x": 6.121154427773945e-8,
+                "y": 0.20999997854232789
+            }
+        },
+        {
+            "prefabName": "RigRibcage",
+            "position": {
+                "x": -1.818345936044352e-7,
+                "y": 0.23920059204101563
+            }
+        },
+        {
+            "prefabName": "RigSpine2",
+            "position": {
+                "x": -1.818345936044352e-7,
+                "y": 0.057059407234191897
+            }
+        },
+        {
+            "prefabName": "RigSpine1",
+            "position": {
+                "x": -1.818345793935805e-7,
+                "y": -0.12508177757263184
+            }
+        },
+        {
+            "prefabName": "RigRLegAnkle",
+            "position": {
+                "x": -0.034275539219379428,
+                "y": -0.5146429538726807
+            }
+        },
+        {
+            "prefabName": "RigRLeg2",
+            "position": {
+                "x": -0.02083558402955532,
+                "y": -0.35246628522872927
+            }
+        },
+        {
+            "prefabName": "RigRLeg1",
+            "position": {
+                "x": 0.0000010475113185748342,
+                "y": -0.1386953592300415
+            }
+        },
+        {
+            "prefabName": "RigLLegAnkle",
+            "position": {
+                "x": -0.034276045858860019,
+                "y": -0.5146429538726807
+            }
+        },
+        {
+            "prefabName": "RigLLeg2",
+            "position": {
+                "x": -0.02083561383187771,
+                "y": -0.35246628522872927
+            }
+        },
+        {
+            "prefabName": "RigLLeg1",
+            "position": {
+                "x": 0.0000010177089961871389,
+                "y": -0.1386953592300415
+            }
+        },
+        {
+            "prefabName": "RigPelvis",
+            "position": {
+                "x": -1.818345793935805e-7,
+                "y": -0.12508177757263184
+            }
+        },
+        {
+            "prefabName": "RigLLegPlatform",
+            "position": {
+                "x": 0.003264080034568906,
+                "y": -0.5899999737739563
+            }
+        },
+        {
+            "prefabName": "RigLArmPalmGizmo",
+            "position": {
+                "x": 0.0001355133281322196,
+                "y": 0.2303125262260437
+            }
+        },
+        {
+            "prefabName": "RigLArm2Gizmo",
+            "position": {
+                "x": -0.00081191974459216,
+                "y": 0.2316640019416809
+            }
+        },
+        {
+            "prefabName": "RigLArm1Gizmo",
+            "position": {
+                "x": -2.3715199404250598e-7,
+                "y": 0.23467642068862916
+            }
+        },
+        {
+            "prefabName": "RigHeadGizmo",
+            "position": {
+                "x": -3.0757607305531567e-7,
+                "y": 0.6467137932777405
+            }
+        },
+        {
+            "prefabName": "Rig",
+            "position": {
+                "x": 0.0,
+                "y": -0.5899999737739563
+            }
+        },
+        {
+            "prefabName": "Base",
+            "position": {
+                "x": 0.0,
+                "y": -0.5899999737739563
+            }
+        },
+        {
+            "prefabName": "Player",
+            "position": {
+                "x": 0.0,
+                "y": -0.5899999737739563
+            }
+        },
+        {
+            "prefabName": "Box",
+            "position": {
+                "x": -2.5,
+                "y": -5.0
+            }
+        },
+        {
+            "prefabName": "LeftSideFrame",
+            "position": {
+                "x": -14.5,
+                "y": 1.0
+            }
+        },
+        {
+            "prefabName": "Switch (1)",
+            "position": {
+                "x": -6.0,
+                "y": -6.400000095367432
+            }
+        },
+        {
+            "prefabName": "BackGroundFrame",
+            "position": {
+                "x": 0.0,
+                "y": 1.0
+            }
+        },
+        {
+            "prefabName": "RightSideFrame",
+            "position": {
+                "x": 14.5,
+                "y": 1.0
+            }
+        },
+        {
+            "prefabName": "UpperFlame",
+            "position": {
+                "x": 0.0,
+                "y": 9.0
+            }
+        },
+        {
+            "prefabName": "LowerFrame",
+            "position": {
+                "x": 0.0,
+                "y": -7.0
+            }
+        },
+        {
+            "prefabName": "StageFrameBase",
+            "position": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        }
+    ]
+}
