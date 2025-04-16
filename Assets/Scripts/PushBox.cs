@@ -58,6 +58,11 @@ public class PushBox
             }
 
         }
+        else if(!PushableChecker(playerPos, zLocalScal))
+        {
+            _timer = 0;
+            _currentPushForce = _minPushForce;
+        }
 
         //押すことが可能な状態かつ、スペースキーから指が離れたら処理を行う
         if (PushableChecker(playerPos, zLocalScal) && Input.GetKeyUp(KeyCode.Space))
