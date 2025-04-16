@@ -47,7 +47,7 @@ public class MapEditorWindow : EditorWindow
     {
         string path = EditorUtility.SaveFilePanel(
             "マップデータを保存",
-            "Assets/JSON/",
+            "Assets/Resources/Json/",
             "StageData.json",
             "json"
         );

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// プレイヤーの挙動を管理するクラス
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);    // 箱を押し出す処理を行う
 
         ChangeDirection();
+        ReStart();
     }
 
     /// <summary>
@@ -62,6 +64,14 @@ public class PlayerController : MonoBehaviour
         else if (_moveDirection < 0)
         {
             this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _invertedZLocalScale);
+        }
+    }
+
+    private void ReStart()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MainLoop");
         }
     }
 }
