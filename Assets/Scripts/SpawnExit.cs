@@ -17,8 +17,11 @@ public class SpawnExit : MonoBehaviour
         _switches = GameObject.FindGameObjectsWithTag("ClearJudgeObject");
         _exitDoor = GameObject.FindGameObjectWithTag("Finish");
 
-        //出口を非表示にする
-        _exitDoor.SetActive(false);
+        if (_exitDoor != null)
+        {
+            //出口を非表示にする
+            _exitDoor.SetActive(false);
+        }
 
         //要素数をステージ上に配置されたスイッチと同じ数にする
         _isPresseds = new bool[_switches.Length];
