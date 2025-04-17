@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapLoader : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class MapLoader : MonoBehaviour
         if (jsonText == null)
         {
             Debug.LogError($"マップデータ {jsonFileName}.json が Resources に見つかりませんでした。");
+            SceneManager.LoadScene("StageSelectScene");
             return;
         }
 

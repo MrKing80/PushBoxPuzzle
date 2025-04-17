@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EscapeStage : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class EscapeStage : MonoBehaviour
         //衝突した相手がプレイヤーであれば判定を返す
         if(other.CompareTag("Player"))
         {
-            //ゲームプレイ終了
-            UnityEditor.EditorApplication.isPlaying = false;
+            SceneManager.LoadScene("StageSelectScene");
         }
     }
 }
