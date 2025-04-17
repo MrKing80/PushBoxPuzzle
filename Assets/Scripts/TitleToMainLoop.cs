@@ -16,7 +16,7 @@ public class TitleToMainLoop : MonoBehaviour
     {
         if(Input.anyKey)
         {
-            SceneManager.LoadScene("MainLoop");
+            SceneManager.LoadScene("StageSelectScene");
         }
     }
 }

@@ -5,7 +5,7 @@ public class MapLoader : MonoBehaviour
 {
     [SerializeField] private string jsonFileName = "StageData"; // Resources/StageData.json を対象
     [SerializeField] private Transform parentForObjects; // 配置オブジェクトの親（空オブジェクトでもOK）
-
+    private int _stageNum = 1;
     private void Awake()
     {
         LoadMapFromJson();
@@ -13,6 +13,13 @@ public class MapLoader : MonoBehaviour
 
     public void LoadMapFromJson()
     {
+        if (StageSelectManager.Instance != null)
+        {
+            _stageNum = StageSelectManager.Instance.SetStageNumber();
+        }
+
+        jsonFileName = jsonFileName + _stageNum;
+
         TextAsset jsonText = Resources.Load<TextAsset>(jsonFileName);
 
         if (jsonText == null)
@@ -34,6 +41,7 @@ public class MapLoader : MonoBehaviour
 
             Vector3 pos = new Vector3(objData.position.x, objData.position.y, 0f);
             GameObject instance = Instantiate(prefab, pos, Quaternion.identity);
+
             if (parentForObjects != null)
             {
                 instance.transform.parent = parentForObjects;

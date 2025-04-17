@@ -7,12 +7,12 @@ public class SpawnExit : MonoBehaviour
     private GameObject _exitDoor = default;        //出口オブジェクトを格納する変数
     private bool[] _isPresseds = default;                           //それぞれのスイッチの状態を格納する配列
     private bool _isPassedTheCheck = false;                         //すべてのスイッチが押されたかを判定する変数
-    private float _waitSec = 0.5f;                                  //一定時間待機する時間を格納した変数
+    private float _waitSec = 0.25f;                                  //一定時間待機する時間を格納した変数
 
     /// <summary>
     /// ゲーム開始時、初期化の設定を行う
     /// </summary>
-    private void Awake()
+    private void Start()
     {
         _switches = GameObject.FindGameObjectsWithTag("ClearJudgeObject");
         _exitDoor = GameObject.FindGameObjectWithTag("Finish");
@@ -43,7 +43,7 @@ public class SpawnExit : MonoBehaviour
         ClearChecker();
 
         //すべてのボタンが押されている状態であれば、出口を出現させる
-        if (_isPassedTheCheck)
+        if (_isPassedTheCheck && _exitDoor != null)
         {
             _exitDoor.SetActive(true);
         }
@@ -90,6 +90,10 @@ public class SpawnExit : MonoBehaviour
 
                 i++;
             }
+
+            //一定時間待つ
+            yield return new WaitForSeconds(_waitSec);
+
         }
     }
 }
