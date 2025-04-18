@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの箱を押し出すアクションを管理するクラス
+/// </summary>
 public class PushBox
 {
     private float _ratio = 5;                   // 押す力の最大値に対して最小値を決めるのに使用する値
