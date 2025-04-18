@@ -9,7 +9,7 @@ public class MapEditorState
     public enum EditMode 
     {
         Place, 
-        Erase 
+        Delete
     }
     public EditMode currentMode = EditMode.Place;
 }

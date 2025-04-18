@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MapLoader : MonoBehaviour
 {
-    [SerializeField] private string jsonFileName = "StageData"; // Resources/StageData.json を対象
+    [SerializeField] private string jsonFileName = "Json/StageData"; // Resources/StageData.json を対象
     [SerializeField] private Transform parentForObjects; // 配置オブジェクトの親（空オブジェクトでもOK）
-    private int _stageNum = 1;
+    [SerializeField] private int _stageNum = 1;
     private void Awake()
     {
         LoadMapFromJson();
@@ -19,13 +19,13 @@ public class MapLoader : MonoBehaviour
             _stageNum = StageSelectManager.Instance.SetStageNumber();
         }
 
-        jsonFileName = jsonFileName + _stageNum;
+        string fileName = jsonFileName + _stageNum;
 
-        TextAsset jsonText = Resources.Load<TextAsset>(jsonFileName);
+        TextAsset jsonText = Resources.Load<TextAsset>(fileName);
 
         if (jsonText == null)
         {
-            Debug.LogError($"マップデータ {jsonFileName}.json が Resources に見つかりませんでした。");
+            Debug.LogError($"マップデータ {fileName}.json が Resources に見つかりませんでした。");
             SceneManager.LoadScene("StageSelectScene");
             return;
         }

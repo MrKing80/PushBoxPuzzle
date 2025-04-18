@@ -41,6 +41,14 @@ public class MapEditorWindow : EditorWindow
             SaveMapToJson();
         }
 
+        if (GUILayout.Button("JSONを読み込む"))
+        {
+            MapLoader mapLoader = GameObject.FindGameObjectWithTag("MapLoader").GetComponent<MapLoader>();
+
+            mapLoader.LoadMapFromJson();
+        }
+
+
     }
 
     private void SaveMapToJson()
@@ -59,6 +67,11 @@ public class MapEditorWindow : EditorWindow
         // 対象となるオブジェクトを取得（プレハブに"MapObject"タグなどを付けると便利）
         foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
         {
+            if (obj.CompareTag("Player"))
+            {
+                continue;
+            }
+
             if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab)
             {
                 MapObjectData data = new MapObjectData
