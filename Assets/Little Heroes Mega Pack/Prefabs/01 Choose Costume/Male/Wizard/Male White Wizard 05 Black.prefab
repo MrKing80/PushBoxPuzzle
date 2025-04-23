@@ -425,6 +425,9 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1159,7 +1162,7 @@ GameObject:
   - component: {fileID: 7576001329236754654}
   - component: {fileID: 9564168}
   - component: {fileID: 1432946571418667281}
-  - component: {fileID: 8700398839844484316}
+  - component: {fileID: 1337028575516568660}
   m_Layer: 7
   m_Name: Male White Wizard 05 Black
   m_TagString: Player
@@ -1209,14 +1212,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 7
-  _jumpForce: 6
+  _jumpForce: 6.5
   _maxPushForce: 20
   _boxLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!95 &9564168
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1230,6 +1233,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1262,8 +1266,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!136 &8700398839844484316
-CapsuleCollider:
+--- !u!65 &1337028575516568660
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1280,11 +1284,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3150564
-  m_Height: 1.8219715
-  m_Direction: 1
-  m_Center: {x: 0.010274619, y: 0.8630702, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.5662909, z: 0.56853944}
+  m_Center: {x: -1.2705478e-21, y: 0.72808886, z: 0.0000003874302}
 --- !u!1 &199984
 GameObject:
   m_ObjectHideFlags: 0

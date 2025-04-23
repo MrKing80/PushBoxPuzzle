@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class ClearJudge : MonoBehaviour
 {
-    [SerializeField] private LayerMask _boxLayer = default;     // ƒŒƒC‚ªƒqƒbƒg‚·‚éƒŒƒCƒ„[
-    private Rigidbody _hitRigidbody = default;                  // ƒqƒbƒg‚µ‚½‘Šè‚ÌƒŠƒWƒbƒhƒ{ƒfƒB
-    private bool _isPressed = false;                            // ƒXƒCƒbƒ`‚ª‰Ÿ‚³‚ê‚½‚©
-    private float _stopThreshold = 0.001f;                      // ‘¬“x‚ª‚±‚Ì’lˆÈ‰º‚È‚ç~‚Ü‚Á‚Ä‚¢‚é‚Æ‚İ‚È‚·
+    [SerializeField] private LayerMask _boxLayer = default;     // ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã™ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼
+    private Rigidbody _hitRigidbody = default;                  // ãƒ’ãƒƒãƒˆã—ãŸç›¸æ‰‹ã®ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£
+    private bool _isPressed = false;                            // ã‚¹ã‚¤ãƒƒãƒãŒæŠ¼ã•ã‚ŒãŸã‹
+    private float _stopThreshold = 0.001f;                      // é€Ÿåº¦ãŒã“ã®å€¤ä»¥ä¸‹ãªã‚‰æ­¢ã¾ã£ã¦ã„ã‚‹ã¨ã¿ãªã™
 
     /// <summary>
-    /// ƒXƒCƒbƒ`‚Ìó‘Ô‚ğ•Ô‚·ƒvƒƒpƒeƒB
+    /// ã‚¹ã‚¤ãƒƒãƒã®çŠ¶æ…‹ã‚’è¿”ã™ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
     /// </summary>
     public bool GetIsPressed
     {
@@ -16,7 +16,7 @@ public class ClearJudge : MonoBehaviour
     }
 
     /// <summary>
-    /// ˆê’èŠÔ‚²‚Æ‚ÉƒŒƒC‚ğ”ò‚Î‚µA”»’è‚ğ‚Æ‚é
+    /// ä¸€å®šæ™‚é–“ã”ã¨ã«ãƒ¬ã‚¤ã‚’é£›ã°ã—ã€åˆ¤å®šã‚’ã¨ã‚‹
     /// </summary>
     private void FixedUpdate()
     {
@@ -24,31 +24,31 @@ public class ClearJudge : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒŒƒC‚ğËo‚µAƒXƒCƒbƒ`‚ª‰Ÿ‚³‚ê‚½‚©”»’è‚ğs‚¤ƒƒ\ƒbƒh
+    /// ãƒ¬ã‚¤ã‚’å°„å‡ºã—ã€ã‚¹ã‚¤ãƒƒãƒãŒæŠ¼ã•ã‚ŒãŸã‹åˆ¤å®šã‚’è¡Œã†ãƒ¡ã‚½ãƒƒãƒ‰
     /// </summary>
     private void ThrowARay()
     {
-        Vector3 offset = Vector3.down * 0.5f;                               // ËoˆÊ’u‚ğ’²®‚·‚é
-        float maxRayDistans = 0.5f;                                         // ƒŒƒC‚ÌËo‹——£
-        RaycastHit _hitInfo = default;                                      // ƒŒƒC‚ªƒqƒbƒg‚µ‚½‘ŠèƒIƒuƒWƒFƒNƒg‚Ìî•ñ
-        Ray ray = new Ray(transform.position + offset, transform.up);       // ƒŒƒC‚ğ”ò‚Î‚·
+        Vector3 offset = Vector3.down * 0.5f;                               // å°„å‡ºä½ç½®ã‚’èª¿æ•´ã™ã‚‹
+        float maxRayDistans = 0.5f;                                         // ãƒ¬ã‚¤ã®å°„å‡ºè·é›¢
+        RaycastHit _hitInfo = default;                                      // ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã—ãŸç›¸æ‰‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±
+        Ray ray = new Ray(transform.position + offset, transform.up);       // ãƒ¬ã‚¤ã‚’é£›ã°ã™
 
-        Debug.DrawRay(transform.position + offset, transform.up * maxRayDistans, Color.black);      // ƒŒƒC‚ğ•`‰æ‚·‚é
+        Debug.DrawRay(transform.position + offset, transform.up * maxRayDistans, Color.black);      // ãƒ¬ã‚¤ã‚’æç”»ã™ã‚‹
 
-        // ƒŒƒC‚ªƒqƒbƒg‚µ‚Ä‚¢‚é‚©
+        // ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã—ã¦ã„ã‚‹ã‹
         if (Physics.Raycast(ray, out _hitInfo, maxRayDistans, _boxLayer))
         {
-            //ƒqƒbƒg‚µ‚½‘Šè‚ÌƒŠƒWƒbƒhƒ{ƒfƒB‚ğæ“¾
+            //ãƒ’ãƒƒãƒˆã—ãŸç›¸æ‰‹ã®ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£ã‚’å–å¾—
             _hitRigidbody = _hitInfo.rigidbody;
 
-            //ƒqƒbƒg‚µ‚½‘Šè‚ª~‚Ü‚Á‚Ä‚¢‚éA‚©‚ÂƒXƒCƒbƒ`‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ê‡
-            if (_hitRigidbody.velocity.magnitude < _stopThreshold && !_isPressed)
+            //ãƒ’ãƒƒãƒˆã—ãŸç›¸æ‰‹ãŒæ­¢ã¾ã£ã¦ã„ã‚‹ã€ã‹ã¤ã‚¹ã‚¤ãƒƒãƒãŒæŠ¼ã•ã‚Œã¦ã„ãªã„å ´åˆ
+            if (_hitRigidbody.linearVelocity.magnitude < _stopThreshold && !_isPressed)
             {
-                //ƒXƒCƒbƒ`‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éó‘Ô‚É‚·‚é
+                //ã‚¹ã‚¤ãƒƒãƒãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹ã«ã™ã‚‹
                 _isPressed = true;
             }
         }
-        //ƒŒƒC‚ªƒqƒbƒg‚µ‚Ä‚¢‚È‚¯‚ê‚ÎƒXƒCƒbƒ`‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ó‘Ô‚É‚·‚é
+        //ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã—ã¦ã„ãªã‘ã‚Œã°ã‚¹ã‚¤ãƒƒãƒãŒæŠ¼ã•ã‚Œã¦ã„ãªã„çŠ¶æ…‹ã«ã™ã‚‹
         else if(!Physics.Raycast(ray, out _hitInfo, maxRayDistans, _boxLayer))
         {
             _isPressed = false;

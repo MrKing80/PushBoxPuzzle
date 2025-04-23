@@ -1,19 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚ÉŠÖ‚·‚éƒNƒ‰ƒX
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class PlayerMove
 {
-    private float _moveSpeed = 0;                       // ˆÚ“®‘¬“x
-    private Rigidbody _playerRigidbody = default;       // ƒvƒŒƒCƒ„[‚ÌRigidbody
+    private float _doNothing = 0;
+    private float _moveSpeed = 0;                       // ç§»å‹•é€Ÿåº¦
+    private Rigidbody _playerRigidbody = default;       // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Rigidbody
 
     /// <summary>
-    /// PlayerMove‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
-    /// Še•Ï”‚ğ‰Šú‰»‚·‚é
+    /// PlayerMoveã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// å„å¤‰æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹
     /// </summary>
-    /// <param name="playerRigidbody">PlayerController‚©‚çó‚¯æ‚Á‚½Rigidbody</param>
-    /// <param name="moveSpeed">PlayerController‚©‚çó‚¯æ‚Á‚½ˆÚ“®‘¬“x</param>
+    /// <param name="playerRigidbody">PlayerControllerã‹ã‚‰å—ã‘å–ã£ãŸRigidbody</param>
+    /// <param name="moveSpeed">PlayerControllerã‹ã‚‰å—ã‘å–ã£ãŸç§»å‹•é€Ÿåº¦</param>
     public PlayerMove(Rigidbody playerRigidbody, float moveSpeed)
     {
         _moveSpeed = moveSpeed;
@@ -21,25 +23,33 @@ public class PlayerMove
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚Ìˆ—‚ğs‚¤
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã®å‡¦ç†ã‚’è¡Œã†
     /// </summary>
-    public float PlayerMovement()
-    { 
-        // ƒL[“ü—Í‚ğŒŸ’m‚·‚é
-        float moveDirection = Input.GetAxisRaw("Horizontal"); 
-        
-        // ƒvƒŒƒCƒ„[‚ğˆÚ“®‚³‚¹‚é
-        if (moveDirection == 0)
+    public float PlayerMovement(bool isPushed)
+    {
+        // ã‚­ãƒ¼å…¥åŠ›ã‚’æ¤œçŸ¥ã™ã‚‹
+        float moveDirection = Input.GetAxisRaw("Horizontal");
+
+        if (isPushed)
         {
-            //ƒL[“ü—Í‚ª‚È‚¯‚ê‚Î“®‚©‚³‚È‚¢
-            _playerRigidbody.velocity = new Vector3(0, _playerRigidbody.velocity.y, 0);
+            return _doNothing;
         }
         else
         {
-            //ƒL[‚Ì“ü—Í‚É‰‚¶‚ÄƒvƒŒƒCƒ„[‚ğˆÚ“®‚³‚¹‚é
-            _playerRigidbody.velocity = new Vector3(moveDirection * _moveSpeed, _playerRigidbody.velocity.y, 0);
-        }
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç§»å‹•ã•ã›ã‚‹
+            if (moveDirection == 0)
+            {
+                //ã‚­ãƒ¼å…¥åŠ›ãŒãªã‘ã‚Œã°å‹•ã‹ã•ãªã„
+                _playerRigidbody.linearVelocity = new Vector3(0, _playerRigidbody.linearVelocity.y, 0);
+            }
+            else
+            {
+                //ã‚­ãƒ¼ã®å…¥åŠ›ã«å¿œã˜ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç§»å‹•ã•ã›ã‚‹
+                _playerRigidbody.linearVelocity = new Vector3(moveDirection * _moveSpeed, _playerRigidbody.linearVelocity.y, 0);
+            }
 
-        return moveDirection;   //ˆÚ“®•ûŒü‚Ìî•ñ‚ğ•Ô‚·
+            return moveDirection;   //ç§»å‹•æ–¹å‘ã®æƒ…å ±ã‚’è¿”ã™
+
+        }
     }
 }

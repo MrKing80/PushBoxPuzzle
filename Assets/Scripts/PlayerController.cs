@@ -1,5 +1,5 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// プレイヤーの挙動を管理するクラス
@@ -13,12 +13,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask _boxLayer = default; //レイが衝突するレイヤー
 
-    private float _moveDirection = 0;                       // 移動方向
-
     private const int INVERTED_ORIENTATION = -1;            // 向きを反転する用の定数
 
-    private float _zLocalScale = 0;                         // プレイヤーのX軸のローカルスケール
-    private float _invertedZLocalScale = 0;                 // 反転時のプレイヤーのX軸のローカルスケール
+    private float _moveDirection = 0;                       // 移動方向
+
+    private float _zLocalScale = 0;                         // プレイヤーのZ軸のローカルスケール
+    private float _invertedZLocalScale = 0;                 // 反転時のプレイヤーのZ軸のローカルスケール
+
+    private float _interval = 1f;
+    private float _timer = 0;
+
+    private bool _isPushed = false;
 
     private PlayerMove _playerMove = default;               // プレイヤーの移動に関するクラス
     private PlayerJump _playerJump = default;               // プレイヤーのジャンプに関するクラス
@@ -33,8 +38,8 @@ public class PlayerController : MonoBehaviour
         _playerJump = new PlayerJump(this.GetComponent<Rigidbody>(), _jumpForce);   // ジャンプクラスを初期化
         _pushBox = new PushBox(_maxPushForce, _boxLayer);                                      // 箱を押し出すクラスを初期化
 
-        _zLocalScale = transform.localScale.z;                                      // プレイヤーのX軸のローカルスケールを取得
-        _invertedZLocalScale = transform.localScale.z * INVERTED_ORIENTATION;       // プレイヤーのX軸のローカルスケールを取得し反転処理を行う
+        _zLocalScale = transform.localScale.z;                                      // プレイヤーのZ軸のローカルスケールを取得
+        _invertedZLocalScale = transform.localScale.z * INVERTED_ORIENTATION;       // プレイヤーのZ軸のローカルスケールを取得し反転処理を行う
     }
 
     /// <summary>
@@ -42,12 +47,30 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _moveDirection = _playerMove.PlayerMovement();                              // 移動の処理を行う
-        _playerJump.PlayerJumping(this.transform.position);                         // ジャンプの処理を行う
+        _isPushed = _pushBox.IsPushed;
+
+        if (_isPushed)
+        {
+            //時間を計測
+            _timer += Time.deltaTime;
+
+            //一定時間経過したら
+            if (_timer >= _interval)
+            {
+                _isPushed = false;
+
+                _pushBox.IsPushed = _isPushed;
+
+                //タイマーリセット
+                _timer = 0;
+            }
+        }
+
+        _playerJump.PlayerJumping(this.transform.position);                                     // ジャンプの処理を行う
         _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);    // 箱を押し出す処理を行う
+        _moveDirection = _playerMove.PlayerMovement(_isPushed);                                 // 移動の処理を行う
 
         ChangeDirection();
-        ReStart();
     }
 
     /// <summary>
@@ -64,14 +87,6 @@ public class PlayerController : MonoBehaviour
         else if (_moveDirection < 0)
         {
             this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _invertedZLocalScale);
-        }
-    }
-
-    private void ReStart()
-    {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("MainLoop");
         }
     }
 }

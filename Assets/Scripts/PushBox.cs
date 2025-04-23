@@ -9,12 +9,23 @@ public class PushBox
     private float _maxPushForce = 0;            // 押す力の最大値
     private float _minPushForce = 0;            // 押す力の最小値
     private float _currentPushForce = 0;        // 現在の押す力
+
     private float _interval = 0.5f;             // 力を増加させる際のインターバル
     private float _timer = 0;                   // 時間を計測する変数
+    
     private bool _isPushable = false;           // 箱を押すことができるかどうか
+    private bool _isPushed = false;             // 箱が押されたかどうか
+    
     private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
     private LayerMask _boxLayer = default;      // レイがヒットするレイヤー
 
+
+    public bool IsPushed
+    {
+        get { return _isPushed; }
+        set { _isPushed = value; }
+    }
+    
     /// <summary>
     /// PushBoxのコンストラクタ
     /// 箱を押す力の最大値を最小値を決める
@@ -36,13 +47,13 @@ public class PushBox
     public void PlayerPushing(Vector3 playerPos, float zLocalScal)
     {
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
-        if (PushableChecker(playerPos,zLocalScal) && Input.GetKey(KeyCode.Space))
+        if (PushableChecker(playerPos, zLocalScal) && Input.GetKey(KeyCode.Space))
         {
             //時間を計測
             _timer += Time.deltaTime;
 
             //一定時間経過したら
-            if(_timer >= _interval)
+            if (_timer >= _interval)
             {
                 //押す力が最大値を超えたら最小値にリセット
                 if (_currentPushForce >= _maxPushForce)
@@ -61,7 +72,7 @@ public class PushBox
             }
 
         }
-        else if(!PushableChecker(playerPos, zLocalScal))
+        else if (!PushableChecker(playerPos, zLocalScal))
         {
             _timer = 0;
             _currentPushForce = _minPushForce;
@@ -81,6 +92,8 @@ public class PushBox
 
             //押す力をリセット
             _currentPushForce = _minPushForce;
+
+            _isPushed = true;
         }
     }
 
@@ -92,7 +105,7 @@ public class PushBox
     /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
     /// <returns>trueならば箱を押すことが可能、falseならば箱を押すことはできない</returns>
     private bool PushableChecker(Vector3 playerPos, float zLocalScal)
-    {        
+    {
         float maxRayDistans = 0.5f;         //レイの射出距離
         Ray ray = default;
 

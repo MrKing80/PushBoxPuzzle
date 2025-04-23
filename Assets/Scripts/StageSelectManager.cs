@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ステージセレクトに関するマネージャー
+/// </summary>
 public class StageSelectManager : MonoBehaviour
 {
+    // jsonファイルに対応した番号を格納する変数
     private int _stageNum = 0;
 
-    public static StageSelectManager Instance { get; private set; }
 
     public void GetStageNumber(int stageNum)
     {
@@ -17,6 +18,11 @@ public class StageSelectManager : MonoBehaviour
     {
         return _stageNum;
     }
+
+
+    // ステージセレクトマネージャーのシングルトン
+    public static StageSelectManager Instance { get; private set; }
+
     private void Awake()
     {
         if (Instance == null)
