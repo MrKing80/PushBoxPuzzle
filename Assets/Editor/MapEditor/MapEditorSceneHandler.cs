@@ -41,7 +41,7 @@ public class MapEditorSceneHandler
 
     private void PlaceAt(Vector3 position)
     {
-        var existing = GameObject.FindObjectsOfType<GameObject>();
+        var existing = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (var obj in existing)
         {
             if (Vector3.Distance(obj.transform.position, position) < 0.1f)
@@ -57,7 +57,7 @@ public class MapEditorSceneHandler
 
     private void EraseAt(Vector3 position)
     {
-        foreach (var obj in GameObject.FindObjectsOfType<GameObject>())
+        foreach (var obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
             if (Vector3.Distance(obj.transform.position, position) < 0.1f)
             {

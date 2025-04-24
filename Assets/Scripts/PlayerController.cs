@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// プレイヤーの挙動を管理するクラス
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask _boxLayer = default; //レイが衝突するレイヤー
 
+    [SerializeField] private TMP_Text _showPower = default;
+
     private const int INVERTED_ORIENTATION = -1;            // 向きを反転する用の定数
 
     private float _moveDirection = 0;                       // 移動方向
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private float _interval = 1f;
     private float _timer = 0;
 
+    private float _pushForce = 0;
     private bool _isPushed = false;
 
     private PlayerMove _playerMove = default;               // プレイヤーの移動に関するクラス
@@ -36,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerMove = new PlayerMove(this.GetComponent<Rigidbody>(), _moveSpeed);   // 移動クラスを初期化
         _playerJump = new PlayerJump(this.GetComponent<Rigidbody>(), _jumpForce);   // ジャンプクラスを初期化
-        _pushBox = new PushBox(_maxPushForce, _boxLayer);                                      // 箱を押し出すクラスを初期化
+        _pushBox = new PushBox(_maxPushForce, _boxLayer);                           // 箱を押し出すクラスを初期化
 
         _zLocalScale = transform.localScale.z;                                      // プレイヤーのZ軸のローカルスケールを取得
         _invertedZLocalScale = transform.localScale.z * INVERTED_ORIENTATION;       // プレイヤーのZ軸のローカルスケールを取得し反転処理を行う
@@ -67,10 +71,13 @@ public class PlayerController : MonoBehaviour
         }
 
         _playerJump.PlayerJumping(this.transform.position);                                     // ジャンプの処理を行う
-        _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);    // 箱を押し出す処理を行う
+        _pushForce = _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);                // 箱を押し出す処理を行う
         _moveDirection = _playerMove.PlayerMovement(_isPushed);                                 // 移動の処理を行う
 
+        Debug.Log(_pushForce);
+
         ChangeDirection();
+        ChangeText();
     }
 
     /// <summary>
@@ -87,6 +94,18 @@ public class PlayerController : MonoBehaviour
         else if (_moveDirection < 0)
         {
             this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _invertedZLocalScale);
+        }
+    }
+
+    private void ChangeText()
+    {
+        if(_pushForce > 0)
+        {
+            _showPower.text = _pushForce.ToString();
+        }
+        else if(_pushForce <= 0)
+        {
+            _showPower.text = "";
         }
     }
 }

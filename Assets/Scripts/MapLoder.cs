@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MapLoader : MonoBehaviour
 {
-    [SerializeField] private string jsonFileName = "Json/StageData"; // Resources/StageData.json を対象
-    [SerializeField] private Transform parentForObjects; // 配置オブジェクトの親（空オブジェクトでもOK）
-    [SerializeField] private int _stageNum = 1;
+    private string jsonFileName = "Json/StageData";         // Resources/Json/StageData.json を対象
+    [SerializeField] private Transform parentForObjects;    // 配置オブジェクトの親（空オブジェクトでもOK）
+    [SerializeField] private int _stageNum = 1;             // 呼び出すステージの識別番号
     private void Awake()
     {
         LoadMapFromJson();
@@ -14,6 +14,11 @@ public class MapLoader : MonoBehaviour
 
     public void LoadMapFromJson()
     {
+        if(_stageNum == 0)
+        {
+            return;
+        }
+
         if (StageSelectManager.Instance != null)
         {
             _stageNum = StageSelectManager.Instance.SetStageNumber();

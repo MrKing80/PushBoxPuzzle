@@ -9,6 +9,7 @@ public class PushBox
     private float _maxPushForce = 0;            // 押す力の最大値
     private float _minPushForce = 0;            // 押す力の最小値
     private float _currentPushForce = 0;        // 現在の押す力
+    private float _tmpPushForce = 0;
 
     private float _interval = 0.5f;             // 力を増加させる際のインターバル
     private float _timer = 0;                   // 時間を計測する変数
@@ -44,8 +45,9 @@ public class PushBox
     /// </summary>
     /// <param name="playerPos">プレイヤーのポジション</param>
     /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
-    public void PlayerPushing(Vector3 playerPos, float zLocalScal)
+    public float PlayerPushing(Vector3 playerPos, float zLocalScal)
     {
+
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
         if (PushableChecker(playerPos, zLocalScal) && Input.GetKey(KeyCode.Space))
         {
@@ -64,6 +66,8 @@ public class PushBox
                 //押す力を増加
                 _currentPushForce += _minPushForce;
 
+                _tmpPushForce = _currentPushForce;
+
                 //タイマーリセット
                 _timer = 0;
 
@@ -76,6 +80,7 @@ public class PushBox
         {
             _timer = 0;
             _currentPushForce = _minPushForce;
+            _tmpPushForce = 0;
         }
 
         //押すことが可能な状態かつ、スペースキーから指が離れたら処理を行う
@@ -95,6 +100,8 @@ public class PushBox
 
             _isPushed = true;
         }
+
+        return _tmpPushForce;
     }
 
     /// <summary>

@@ -48,6 +48,10 @@ public class MapEditorWindow : EditorWindow
             mapLoader.LoadMapFromJson();
         }
 
+        if (GUILayout.Button("すべてのオブジェクトを削除"))
+        {
+            DeleteStageObjects();
+        }
 
     }
 
@@ -65,7 +69,7 @@ public class MapEditorWindow : EditorWindow
         List<MapObjectData> dataList = new();
 
         // 対象となるオブジェクトを取得（プレハブに"MapObject"タグなどを付けると便利）
-        foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
+        foreach (GameObject obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
             if (obj.CompareTag("Player"))
             {
@@ -85,6 +89,24 @@ public class MapEditorWindow : EditorWindow
 
         MapDataSerializer.SaveToJson(dataList, path);
         Debug.Log($"マップを保存しました！ ({path})");
+    }
+
+    private void DeleteStageObjects()
+    {
+        // 対象となるオブジェクトを取得（プレハブに"MapObject"タグなどを付けると便利）
+        foreach (GameObject obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
+        {
+            if (obj.CompareTag("Player"))
+            {
+                continue;
+            }
+
+            if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab || obj.name.Contains("Clone"))
+            {
+                Undo.DestroyObjectImmediate(obj);
+            }
+        }
+
     }
 
 }

@@ -322,11 +322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466716, guid: e3b3bc2aff96f304f9b0be404817537d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 466716, guid: e3b3bc2aff96f304f9b0be404817537d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 466716, guid: e3b3bc2aff96f304f9b0be404817537d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -392,7 +392,7 @@ Transform:
   m_GameObject: {fileID: 1831853218}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0165055, y: 0.48204592, z: -14.148264}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,9 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7083d81056a5ede4492396e2ab0c8e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFileName: Json/StageData
   parentForObjects: {fileID: 0}
-  _stageNum: 1
+  _stageNum: 3
 --- !u!114 &1831853222
 MonoBehaviour:
   m_ObjectHideFlags: 0
