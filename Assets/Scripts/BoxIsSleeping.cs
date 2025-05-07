@@ -5,7 +5,8 @@ using UnityEngine;
 /// </summary>
 public class BoxIsSleeping : MonoBehaviour
 {
-    private Rigidbody _boxRigidbody = default;  // 箱のRigidbody
+    // 箱のRigidbodyを格納するための変数
+    private Rigidbody _boxRigidbody = default;
 
     /// <summary>
     /// 初期化処理をする
@@ -17,14 +18,14 @@ public class BoxIsSleeping : MonoBehaviour
     }
 
     /// <summary>
-    /// 一定時間ごとに判定を行う
+    /// 一定時間ごとに判定を行う（FixedUpdateは物理演算のタイミングで呼ばれる）
     /// </summary>
     private void FixedUpdate()
     {
-        // 箱が静止しているのかを判定
+        // 箱が物理的に「静止している」かどうかをチェック
         if (_boxRigidbody.IsSleeping())
         {
-            // 静止していれば物理演算の影響を受けないようにする
+            // 静止している場合、物理演算を無効化して最適化を図る
             _boxRigidbody.isKinematic = true;
         }
     }

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask _boxLayer = default; //レイが衝突するレイヤー
 
-    [SerializeField] private TMP_Text _showPower = default;
+    [SerializeField] private TMP_Text _showPower = default; // 押す力を表示するテキストUI
 
     private const int INVERTED_ORIENTATION = -1;            // 向きを反転する用の定数
 
@@ -23,11 +23,11 @@ public class PlayerController : MonoBehaviour
     private float _zLocalScale = 0;                         // プレイヤーのZ軸のローカルスケール
     private float _invertedZLocalScale = 0;                 // 反転時のプレイヤーのZ軸のローカルスケール
 
-    private float _interval = 1f;
-    private float _timer = 0;
+    private float _interval = 1f;                           // 押された状態の解除までの時間間隔
+    private float _timer = 0;                               // 経過時間を記録するタイマー
 
-    private float _pushForce = 0;
-    private bool _isPushed = false;
+    private float _pushForce = 0;                           // 現在の押す力
+    private bool _isPushed = false;                         // プレイヤーが箱を押している状態かどうか
 
     private PlayerMove _playerMove = default;               // プレイヤーの移動に関するクラス
     private PlayerJump _playerJump = default;               // プレイヤーのジャンプに関するクラス
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _isPushed = _pushBox.IsPushed;
+        _isPushed = _pushBox.IsPushed; // 押し状態を取得
 
         if (_isPushed)
         {
@@ -71,13 +71,11 @@ public class PlayerController : MonoBehaviour
         }
 
         _playerJump.PlayerJumping(this.transform.position);                                     // ジャンプの処理を行う
-        _pushForce = _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);                // 箱を押し出す処理を行う
+        _pushForce = _pushBox.PlayerPushing(this.transform.position, transform.localScale.z);   // 箱を押し出す処理を行う
         _moveDirection = _playerMove.PlayerMovement(_isPushed);                                 // 移動の処理を行う
 
-        Debug.Log(_pushForce);
-
-        ChangeDirection();
-        ChangeText();
+        ChangeDirection(); // 移動方向に応じた向き変更
+        ChangeText();      // 押し出し力の表示更新
     }
 
     /// <summary>
@@ -85,7 +83,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void ChangeDirection()
     {
-        Vector3 playerLocalScale = this.transform.localScale;
+        Vector3 playerLocalScale = this.transform.localScale; // 現在のスケールを一時保存
 
         if (_moveDirection > 0)
         {
@@ -99,13 +97,13 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeText()
     {
-        if(_pushForce > 0)
+        if (_pushForce > 0)
         {
-            _showPower.text = _pushForce.ToString();
+            _showPower.text = _pushForce.ToString(); // 押し出し力を文字列で表示
         }
-        else if(_pushForce <= 0)
+        else if (_pushForce <= 0)
         {
-            _showPower.text = "";
+            _showPower.text = ""; // 力が0以下の場合は非表示
         }
     }
 }

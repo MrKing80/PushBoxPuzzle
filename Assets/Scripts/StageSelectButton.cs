@@ -13,7 +13,7 @@ public class StageSelectButton : MonoBehaviour
     /// <param name="stageNum">ステージ番号</param>
     public void OnClickStageSelect(int stageNum)
     {
-        StartCoroutine(LoadStage(stageNum));
+        StartCoroutine(LoadStage(stageNum)); // ステージ読み込み用のコルーチンを開始
     }
 
     /// <summary>
@@ -22,11 +22,11 @@ public class StageSelectButton : MonoBehaviour
     /// <param name="stageNum">ステージ番号</param>
     private IEnumerator LoadStage(int stageNum)
     {
-        StageSelectManager.Instance.GetStageNumber(stageNum);
+        StageSelectManager.Instance.GetStageNumber(stageNum); // ステージ番号を管理クラスに渡す
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f); // 少し待ってから遷移
 
-        Debug.Log("ゲームシーンへ遷移します");
-        SceneManager.LoadScene("MainLoop");
+        Debug.Log("ゲームシーンへ遷移します"); // デバッグ用ログ
+        SceneManager.LoadScene("MainLoop"); // メインループシーンに遷移
     }
 }

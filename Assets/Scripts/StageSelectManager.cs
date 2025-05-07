@@ -9,11 +9,18 @@ public class StageSelectManager : MonoBehaviour
     private int _stageNum = 0;
 
 
+    /// <summary>
+    /// ステージ番号を取得するメソッド
+    /// </summary>
+    /// <param name="stageNum"></param>
     public void GetStageNumber(int stageNum)
     {
         _stageNum = stageNum;
     }
 
+    /// <summary>
+    /// ステージ番号を返すメソッド
+    /// </summary>
     public int SetStageNumber()
     {
         return _stageNum;

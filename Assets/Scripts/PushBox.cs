@@ -9,24 +9,24 @@ public class PushBox
     private float _maxPushForce = 0;            // 押す力の最大値
     private float _minPushForce = 0;            // 押す力の最小値
     private float _currentPushForce = 0;        // 現在の押す力
-    private float _tmpPushForce = 0;
+    private float _tmpPushForce = 0;            // 表示用などに一時保持する押す力
 
     private float _interval = 0.5f;             // 力を増加させる際のインターバル
     private float _timer = 0;                   // 時間を計測する変数
-    
+
     private bool _isPushable = false;           // 箱を押すことができるかどうか
     private bool _isPushed = false;             // 箱が押されたかどうか
-    
+
     private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
     private LayerMask _boxLayer = default;      // レイがヒットするレイヤー
 
-
+    // 外部から押された状態を取得・設定するプロパティ
     public bool IsPushed
     {
         get { return _isPushed; }
         set { _isPushed = value; }
     }
-    
+
     /// <summary>
     /// PushBoxのコンストラクタ
     /// 箱を押す力の最大値を最小値を決める
@@ -47,7 +47,6 @@ public class PushBox
     /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
     public float PlayerPushing(Vector3 playerPos, float zLocalScal)
     {
-
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
         if (PushableChecker(playerPos, zLocalScal) && Input.GetKey(KeyCode.Space))
         {
@@ -72,10 +71,10 @@ public class PushBox
                 _timer = 0;
 
                 Debug.Log(_currentPushForce);
-
             }
 
         }
+        // 押せない状況でスペースキーが押されている、または何も押していないとき
         else if (!PushableChecker(playerPos, zLocalScal))
         {
             _timer = 0;
@@ -114,7 +113,7 @@ public class PushBox
     private bool PushableChecker(Vector3 playerPos, float zLocalScal)
     {
         float maxRayDistans = 0.5f;         //レイの射出距離
-        Ray ray = default;
+        Ray ray = default;                  // レイの変数を初期化
 
         //プレイヤーの向きに応じてレイの射出方向を変える
         if (zLocalScal < 0)

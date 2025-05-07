@@ -2,45 +2,58 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
+// マップエディターのシーン内操作を処理するクラス
 public class MapEditorSceneHandler
 {
     private MapEditorState state;
 
+    // コンストラクタ：エディタの状態を受け取って保持
     public MapEditorSceneHandler(MapEditorState editorState)
     {
         state = editorState;
     }
 
+    // SceneビューでのGUIイベントを処理
     public void OnSceneGUI(SceneView sceneView)
     {
         Event e = Event.current;
+
+        // 左クリックかつプレハブが選択されている場合に処理
         if (e.type == EventType.MouseDown && e.button == 0 && state.selectedPrefab != null)
         {
+            // マウス位置からレイを生成
             Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+
+            // レイキャストで地面などにヒットした場合
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 pos = hit.point;
+
+                // スナップ設定が有効ならグリッドに合わせて位置調整
                 if (state.snapEnabled)
                 {
                     pos.x = Mathf.Round(pos.x / state.gridSize) * state.gridSize;
                     pos.y = Mathf.Round(pos.y / state.gridSize) * state.gridSize;
-                    pos.z = 0f;
+                    pos.z = 0f; // Z座標は固定
                 }
 
+                // 配置モードか削除モードで処理を分岐
                 if (state.currentMode == MapEditorState.EditMode.Place)
-                    PlaceAt(pos);
+                    PlaceAt(pos); // プレハブを配置
                 else
-                    EraseAt(pos);
+                    EraseAt(pos); // オブジェクトを削除
 
-                e.Use();
+                e.Use(); // イベントを消費
             }
         }
 
-        // カーソル下にプレビュー表示など追加可能
+        // カーソル下にプレビュー表示などの拡張が可能
     }
 
+    // 指定位置にプレハブを配置する処理
     private void PlaceAt(Vector3 position)
     {
+        // すでに同じ位置にオブジェクトがある場合は配置しない
         var existing = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (var obj in existing)
         {
@@ -48,20 +61,26 @@ public class MapEditorSceneHandler
                 return;
         }
 
+        // プレハブをインスタンス化して配置
         GameObject placed = (GameObject)PrefabUtility.InstantiatePrefab(state.selectedPrefab);
         placed.transform.position = position;
 
+        // Undo機能に対応させる
         Undo.RegisterCreatedObjectUndo(placed, "Place Prefab");
+
+        // シーンを変更済みにマーク
         EditorSceneManager.MarkSceneDirty(placed.scene);
     }
 
+    // 指定位置のオブジェクトを削除する処理
     private void EraseAt(Vector3 position)
     {
         foreach (var obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
+            // 対象位置のオブジェクトを発見したら削除
             if (Vector3.Distance(obj.transform.position, position) < 0.1f)
             {
-                Undo.DestroyObjectImmediate(obj);
+                Undo.DestroyObjectImmediate(obj); // Undoに対応した削除
                 break;
             }
         }
