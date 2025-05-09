@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class SpawnExit : MonoBehaviour
 {
-    private GameObject[] _switches = default;      //ステージ上に配置されたスイッチを格納する配列
-    private GameObject _exitDoor = default;        //出口オブジェクトを格納する変数
-    private bool[] _isPresseds = default;                           //それぞれのスイッチの状態を格納する配列
-    private bool _isPassedTheCheck = false;                         //すべてのスイッチが押されたかを判定する変数
-    private float _waitSec = 0.25f;                                  //一定時間待機する時間を格納した変数
+    private GameObject[] _switches = default;       //ステージ上に配置されたスイッチを格納する配列
+    private GameObject _exitDoor = default;         //出口オブジェクトを格納する変数
+    private bool[] _isPresseds = default;           //それぞれのスイッチの状態を格納する配列
+    private bool _isPassedTheCheck = false;         //すべてのスイッチが押されたかを判定する変数
+    private float _waitSec = 0.25f;                 //一定時間待機する時間を格納した変数
 
     /// <summary>
     /// ゲーム開始時、初期化の設定を行う
