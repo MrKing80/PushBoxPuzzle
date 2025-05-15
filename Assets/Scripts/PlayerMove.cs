@@ -1,55 +1,75 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// プレイヤーの移動に関するクラス
 /// </summary>
-public class PlayerMove
+public class PlayerMove : MonoBehaviour
 {
-    private float _doNothing = 0;
-    private float _moveSpeed = 0;                       // 移動速度
+    private float _moveDirection = 0;                   // プレイヤーの移動する方向
+    private float _zLocalScale = 0;                     // プレイヤーのZ軸のローカルスケール
+    private float _invertedZLocalScale = 0;             // 反転時のプレイヤーのZ軸のローカルスケール
+    private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
     private Rigidbody _playerRigidbody = default;       // プレイヤーのRigidbody
 
-    /// <summary>
-    /// PlayerMoveのコンストラクタ
-    /// 各変数を初期化する
-    /// </summary>
-    /// <param name="playerRigidbody">PlayerControllerから受け取ったRigidbody</param>
-    /// <param name="moveSpeed">PlayerControllerから受け取った移動速度</param>
-    public PlayerMove(Rigidbody playerRigidbody, float moveSpeed)
+    public Rigidbody Rigidbody
     {
-        _moveSpeed = moveSpeed;
-        _playerRigidbody = playerRigidbody;
+        get { return _playerRigidbody; }
+        set { _playerRigidbody = value;}
+    }
+
+    private void Awake()
+    {
+        _zLocalScale = transform.localScale.z;                                      // プレイヤーのZ軸のローカルスケールを取得
+        _invertedZLocalScale = transform.localScale.z * INVERTED_ORIENTATION;       // プレイヤーのZ軸のローカルスケールを取得し反転処理を行う
     }
 
     /// <summary>
     /// プレイヤーの移動の処理を行う
     /// </summary>
-    public float PlayerMovement(bool isPushed)
+    public void PlayerMovement(float moveSpeed, bool isPushed)
     {
-        // キー入力を検知する
-        float moveDirection = Input.GetAxisRaw("Horizontal");
-
         if (isPushed)
         {
-            return _doNothing;
+            return;
+        }
+
+        // キー入力を検知する
+        _moveDirection = Input.GetAxisRaw("Horizontal");
+
+        ChangeDirection();
+
+        // プレイヤーを移動させる
+        if (_moveDirection == 0)
+        {
+            //キー入力がなければ動かさない
+            _playerRigidbody.linearVelocity = new Vector3(0, _playerRigidbody.linearVelocity.y, 0);
         }
         else
         {
-            // プレイヤーを移動させる
-            if (moveDirection == 0)
-            {
-                //キー入力がなければ動かさない
-                _playerRigidbody.linearVelocity = new Vector3(0, _playerRigidbody.linearVelocity.y, 0);
-            }
-            else
-            {
-                //キーの入力に応じてプレイヤーを移動させる
-                _playerRigidbody.linearVelocity = new Vector3(moveDirection * _moveSpeed, _playerRigidbody.linearVelocity.y, 0);
-            }
+            //キーの入力に応じてプレイヤーを移動させる
+            _playerRigidbody.linearVelocity = new Vector3(_moveDirection * moveSpeed, _playerRigidbody.linearVelocity.y, 0);
+        }
 
-            return moveDirection;   //移動方向の情報を返す
+    }
 
+
+    /// <summary>
+    /// 移動の向きに応じてプレイヤーのローカルスケールを変更する
+    /// </summary>
+    private void ChangeDirection()
+    {
+        Vector3 playerLocalScale = this.transform.localScale; // 現在のスケールを一時保存
+
+        if (_moveDirection > 0)
+        {
+            this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _zLocalScale);
+        }
+        else if (_moveDirection < 0)
+        {
+            this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _invertedZLocalScale);
         }
     }
+
 }

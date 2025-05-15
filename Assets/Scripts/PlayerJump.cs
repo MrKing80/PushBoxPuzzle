@@ -4,7 +4,7 @@ using UnityEngine;
 /// プレイヤーのジャンプに関するクラス
 /// </summary>
 public class PlayerJump
-{
+{ 
     private float _jumpForce = 0;                       // ジャンプ力
     private bool _isGround = true;                      // 接地しているか
     private Rigidbody _playerRigidbody = default;       // プレイヤーのRigidbody
