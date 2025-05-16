@@ -19,18 +19,26 @@ public class PushBox : MonoBehaviour
 
     private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
 
-    // 外部から押された状態を取得・設定するプロパティ
+    /// <summary>
+    /// 外部から押された状態を取得・設定するプロパティ
+    /// </summary>
     public bool IsPushed
     {
         get { return _isPushed; }
         set { _isPushed = value; }
     }
 
+    /// <summary>
+    /// 箱を押す力の最大値を受け取るプロパティ
+    /// </summary>
     public float SetMaxPushForce
     {
         set { _maxPushForce = value; }
     }
 
+    /// <summary>
+    /// 箱を押す力を返すプロパティ
+    /// </summary>
     public float GetPushForce
     {
         get { return _tmpPushForce; }
@@ -48,8 +56,8 @@ public class PushBox : MonoBehaviour
     /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
     public void PlayerPushing(LayerMask boxLayer)
     {
-        Vector3 playerPos = this.transform.position;
-        float zLocalScal = transform.localScale.z;
+        Vector3 playerPos = this.transform.position;        //プレイヤーのポジションを取得
+        float zLocalScal = transform.localScale.z;          //プレイヤーのz軸のローカルスケールを取得
 
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
         if (PushableChecker(playerPos, zLocalScal, boxLayer) && Input.GetKey(KeyCode.Space))

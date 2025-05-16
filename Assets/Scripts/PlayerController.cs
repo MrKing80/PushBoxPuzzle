@@ -34,9 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerRigidoby = this.GetComponent<Rigidbody>();
 
-        _playerMove.Rigidbody = _playerRigidoby;
-
-        _pushBox.SetMaxPushForce = _maxPushForce;
+        _playerMove.Rigidbody = _playerRigidoby;    //playerMoveにリジッドボディの情報を渡す
+        _pushBox.SetMaxPushForce = _maxPushForce;   //pushBoxに箱を押し出す最大の力を渡す
 
         _playerJump = new PlayerJump(this.GetComponent<Rigidbody>(), _jumpForce);   // ジャンプクラスを初期化
 
@@ -66,9 +65,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        _playerMove.PlayerMovement(_moveSpeed, _isPushed);                                      // 移動の処理を行う
-        _playerJump.PlayerJumping(this.transform.position);                                     // ジャンプの処理を行う
-        _pushBox.PlayerPushing(_boxLayer);   // 箱を押し出す処理を行う
+        _playerMove.PlayerMovement(_moveSpeed, _isPushed);      // 移動の処理を行う
+        _playerJump.PlayerJumping(this.transform.position);     // ジャンプの処理を行う
+        _pushBox.PlayerPushing(_boxLayer);                      // 箱を押し出す処理を行う
 
     }
 }

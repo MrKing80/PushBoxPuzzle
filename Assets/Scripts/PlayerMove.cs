@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
     private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
     private Rigidbody _playerRigidbody = default;       // プレイヤーのRigidbody
 
+    /// <summary>
+    /// Rigidbodyの情報を受け取るプロパティ
+    /// </summary>
     public Rigidbody Rigidbody
     {
         get { return _playerRigidbody; }
@@ -30,6 +33,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     public void PlayerMovement(float moveSpeed, bool isPushed)
     {
+        //箱が押されている状態であれば処理を行わない
         if (isPushed)
         {
             return;
@@ -38,7 +42,7 @@ public class PlayerMove : MonoBehaviour
         // キー入力を検知する
         _moveDirection = Input.GetAxisRaw("Horizontal");
 
-        ChangeDirection();
+        ChangeDirection();  //プレイヤーの向きを変える
 
         // プレイヤーを移動させる
         if (_moveDirection == 0)
@@ -62,6 +66,7 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 playerLocalScale = this.transform.localScale; // 現在のスケールを一時保存
 
+        //移動方向がプラスであれば右方向、マイナスであれば左方向を向く
         if (_moveDirection > 0)
         {
             this.transform.localScale = new Vector3(playerLocalScale.x, playerLocalScale.y, _zLocalScale);
