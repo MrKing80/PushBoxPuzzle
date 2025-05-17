@@ -9,7 +9,7 @@ public class PushBox : MonoBehaviour
     private float _maxPushForce = 0;            // 押す力の最大値
     private float _minPushForce = 0;            // 押す力の最小値
     private float _currentPushForce = 0;        // 現在の押す力
-    private float _tmpPushForce = 0;            // 表示用などに一時保持する押す力
+    private float _tmpPushForce = 0;            // 表示用などに一時保持する値
 
     private float _interval = 0.5f;             // 力を増加させる際のインターバル
     private float _timer = 0;                   // 時間を計測する変数
@@ -43,21 +43,37 @@ public class PushBox : MonoBehaviour
     {
         get { return _tmpPushForce; }
     }
+
+
     private void Start()
     {
-        _minPushForce = _maxPushForce / _ratio;     //受け取った力を基に最小値を計算
+        _minPushForce = _maxPushForce / _ratio;     //受け取った力を基に最小値を決定
         _currentPushForce = _minPushForce;          //最小値を格納し初期化する
     }
 
     /// <summary>
     /// プレイヤーが箱を押し出す処理
     /// </summary>
-    /// <param name="playerPos">プレイヤーのポジション</param>
-    /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
+    /// <param name="boxLayer">レイが衝突するレイヤー</param>
     public void PlayerPushing(LayerMask boxLayer)
     {
         Vector3 playerPos = this.transform.position;        //プレイヤーのポジションを取得
         float zLocalScal = transform.localScale.z;          //プレイヤーのz軸のローカルスケールを取得
+
+        // 押せない状況でスペースキーが押されている、または何も押していないとき
+        if (!PushableChecker(playerPos, zLocalScal, boxLayer))
+        {
+            // タイマーをリセット
+            _timer = 0;
+
+            // 最小の力を変数に格納
+            _currentPushForce = _minPushForce;
+
+            // 変数の中身を0にする
+            _tmpPushForce = 0;
+
+            return;
+        }
 
         //箱を押し出すことが可能な状態かつ、スペースが押されていたら処理を行う
         if (PushableChecker(playerPos, zLocalScal, boxLayer) && Input.GetKey(KeyCode.Space))
@@ -77,21 +93,15 @@ public class PushBox : MonoBehaviour
                 //押す力を増加
                 _currentPushForce += _minPushForce;
 
+                // テキストに表示する用に現在の力の値を格納
                 _tmpPushForce = _currentPushForce;
 
                 //タイマーリセット
                 _timer = 0;
 
-                Debug.Log(_currentPushForce);
+                return ;
             }
 
-        }
-        // 押せない状況でスペースキーが押されている、または何も押していないとき
-        else if (!PushableChecker(playerPos, zLocalScal, boxLayer))
-        {
-            _timer = 0;
-            _currentPushForce = _minPushForce;
-            _tmpPushForce = 0;
         }
 
         //押すことが可能な状態かつ、スペースキーから指が離れたら処理を行う
@@ -119,6 +129,7 @@ public class PushBox : MonoBehaviour
     /// </summary>
     /// <param name="playerPos">プレイヤーのポジション</param>
     /// <param name="zLocalScal">プレイヤーのX軸のローカルスケール</param>
+    /// <param name="boxlayer">レイが衝突するレイヤー</param>
     /// <returns>trueならば箱を押すことが可能、falseならば箱を押すことはできない</returns>
     private bool PushableChecker(Vector3 playerPos, float zLocalScal, LayerMask boxlayer)
     {

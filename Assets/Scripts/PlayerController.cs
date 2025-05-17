@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 
 /// <summary>
 /// プレイヤーの挙動を管理するクラス

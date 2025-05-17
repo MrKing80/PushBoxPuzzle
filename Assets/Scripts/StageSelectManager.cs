@@ -13,7 +13,7 @@ public class StageSelectManager : MonoBehaviour
     /// ステージ番号を取得するメソッド
     /// </summary>
     /// <param name="stageNum"></param>
-    public void GetStageNumber(int stageNum)
+    public void SetStageNumber(int stageNum)
     {
         _stageNum = stageNum;
     }
@@ -21,7 +21,7 @@ public class StageSelectManager : MonoBehaviour
     /// <summary>
     /// ステージ番号を返すメソッド
     /// </summary>
-    public int SetStageNumber()
+    public int GetStageNumber()
     {
         return _stageNum;
     }
@@ -39,7 +39,7 @@ public class StageSelectManager : MonoBehaviour
         }
         else if (Instance != this)
         {
-            Destroy(gameObject); // 重複するインスタンスを破棄
+            Destroy(this.gameObject); // 重複するインスタンスを破棄
         }
     }
 

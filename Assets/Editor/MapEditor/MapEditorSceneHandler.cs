@@ -16,38 +16,47 @@ public class MapEditorSceneHandler
     // SceneビューでのGUIイベントを処理
     public void OnSceneGUI(SceneView sceneView)
     {
-        Event e = Event.current;
+        Event guiEvent = Event.current;
 
         // 左クリックかつプレハブが選択されている場合に処理
-        if (e.type == EventType.MouseDown && e.button == 0 && state.selectedPrefab != null)
+        if (!(guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && state.selectedPrefab != null))
         {
-            // マウス位置からレイを生成
-            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-
-            // レイキャストで地面などにヒットした場合
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Vector3 pos = hit.point;
-
-                // スナップ設定が有効ならグリッドに合わせて位置調整
-                if (state.snapEnabled)
-                {
-                    pos.x = Mathf.Round(pos.x / state.gridSize) * state.gridSize;
-                    pos.y = Mathf.Round(pos.y / state.gridSize) * state.gridSize;
-                    pos.z = 0f; // Z座標は固定
-                }
-
-                // 配置モードか削除モードで処理を分岐
-                if (state.currentMode == MapEditorState.EditMode.Place)
-                    PlaceAt(pos); // プレハブを配置
-                else
-                    EraseAt(pos); // オブジェクトを削除
-
-                e.Use(); // イベントを消費
-            }
+            return;
         }
 
-        // カーソル下にプレビュー表示などの拡張が可能
+        // マウス位置からレイを生成
+        Ray ray = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition);
+
+        // レイキャストで地面などにヒットした場合
+        if (!(Physics.Raycast(ray, out RaycastHit hit)))
+        {
+            return;
+        }
+
+
+        Vector3 pos = hit.point;
+
+        // スナップ設定が有効ならグリッドに合わせて位置調整
+        if (state.snapEnabled)
+        {
+            pos.x = Mathf.Round(pos.x / state.gridSize) * state.gridSize;
+            pos.y = Mathf.Round(pos.y / state.gridSize) * state.gridSize;
+            pos.z = 0f; // Z座標は固定
+        }
+
+        // 配置モードか削除モードで処理を分岐
+        if (state.currentMode == MapEditorState.EditMode.Place)
+        {
+            PlaceAt(pos); // プレハブを配置
+        }
+        else
+        {
+            EraseAt(pos); // オブジェクトを削除
+        }
+
+        guiEvent.Use(); // イベントを消費
+
+        // カーソル下にプレビュー表示などの拡張したい
     }
 
     // 指定位置にプレハブを配置する処理

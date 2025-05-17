@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// マップエディターでのステータスを管理するクラス
+/// </summary>
 public class MapEditorState
 {
     public GameObject selectedPrefab;      // 現在選択中のプレハブ

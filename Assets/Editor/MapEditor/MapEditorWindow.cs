@@ -19,9 +19,9 @@ public class MapEditorWindow : EditorWindow
     // ウィンドウが有効化されたときに呼び出される
     private void OnEnable()
     {
-        state = new MapEditorState(); // エディタ状態の初期化
-        sceneHandler = new MapEditorSceneHandler(state); // Sceneビュー操作用のハンドラーを作成
-        SceneView.duringSceneGui += sceneHandler.OnSceneGUI; // SceneGUIイベントに登録
+        state = new MapEditorState();                           // エディタ状態の初期化
+        sceneHandler = new MapEditorSceneHandler(state);        // Sceneビュー操作用のハンドラーを作成
+        SceneView.duringSceneGui += sceneHandler.OnSceneGUI;    // SceneGUIイベントに登録
     }
 
     // ウィンドウが無効化されたときに呼び出される
@@ -40,9 +40,6 @@ public class MapEditorWindow : EditorWindow
 
         // グリッドサイズの指定
         state.gridSize = EditorGUILayout.FloatField("マスサイズ", state.gridSize);
-
-        // スナップの有効/無効切り替え
-        state.snapEnabled = EditorGUILayout.Toggle("スナップON", state.snapEnabled);
 
         // 配置モードと削除モードの切り替え
         state.currentMode = (MapEditorState.EditMode)EditorGUILayout.EnumPopup("モード選択", state.currentMode);

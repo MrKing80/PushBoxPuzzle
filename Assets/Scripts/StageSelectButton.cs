@@ -22,11 +22,10 @@ public class StageSelectButton : MonoBehaviour
     /// <param name="stageNum">ステージ番号</param>
     private IEnumerator LoadStage(int stageNum)
     {
-        StageSelectManager.Instance.GetStageNumber(stageNum); // ステージ番号を管理クラスに渡す
+        StageSelectManager.Instance.SetStageNumber(stageNum); // ステージ番号を管理クラスに渡す
 
         yield return new WaitForSecondsRealtime(0.5f); // 少し待ってから遷移
 
-        Debug.Log("ゲームシーンへ遷移します"); // デバッグ用ログ
         SceneManager.LoadScene("MainLoop"); // メインループシーンに遷移
     }
 }

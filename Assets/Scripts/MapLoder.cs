@@ -7,10 +7,15 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MapLoader : MonoBehaviour
 {
-    private string jsonFileName = "Json/StageData";         // Resources/Json/StageData.json を対象（ステージ番号で拡張）
+    private const string JSON_FILE_PATH = "Json/StageData";         // Resources/Json/StageData.json を対象（ステージ番号で拡張）
+    private const string PREFAB_FILE_PATH = "Prefabs/";             // prefabのオブジェクトファイルパス
+    private const int DEFAULT_STAGE_NUM = 1;                        // ステージ番号のデフォルト値
+    private const int EXCEPTION＿NUM = 0;                           // ステージ番号の例外の値
+    private const float Z_POSITION_FIXED = 0f;
 
-    [SerializeField] private Transform parentForObjects;    // 配置オブジェクトの親（空オブジェクトなど）
-    [SerializeField] private int _stageNum = 1;             // 呼び出すステージの識別番号（デフォルトは1）
+
+    [SerializeField] private Transform parentForObjects;                    // 配置オブジェクトの親（空オブジェクトなど）
+    [SerializeField] private int _stageNum = DEFAULT_STAGE_NUM;             // 呼び出すステージの識別番号
 
     /// <summary>
     /// 起動時にマップデータを読み込む
@@ -25,8 +30,8 @@ public class MapLoader : MonoBehaviour
     /// </summary>
     public void LoadMapFromJson()
     {
-        // ステージ番号が0なら処理をスキップ（読み込み対象なし）
-        if (_stageNum == 0)
+        // ステージ番号が読み込み対象外ならスキップ
+        if (_stageNum == EXCEPTION＿NUM)
         {
             return;
         }
@@ -34,20 +39,25 @@ public class MapLoader : MonoBehaviour
         // ステージ選択マネージャーが存在すれば、現在選択中のステージ番号を取得
         if (StageSelectManager.Instance != null)
         {
-            _stageNum = StageSelectManager.Instance.SetStageNumber();
+            _stageNum = StageSelectManager.Instance.GetStageNumber();
         }
 
-        // 実際に読み込むJSONファイル名を組み立てる（例: Json/StageData1）
-        string fileName = jsonFileName + _stageNum;
+        // 実際に読み込むJSONファイルパスを組み立てる
+        string readFilePath = JSON_FILE_PATH + _stageNum;
 
         // ResourcesフォルダからJSONデータを読み込む
-        TextAsset jsonText = Resources.Load<TextAsset>(fileName);
+        TextAsset jsonText = Resources.Load<TextAsset>(readFilePath);
 
         // 読み込めなかった場合はエラーを出してステージ選択画面に戻る
         if (jsonText == null)
         {
-            Debug.LogError($"マップデータ {fileName}.json が Resources に見つかりませんでした。");
+            Debug.LogError($"マップデータ {readFilePath}.json が Resources に見つかりませんでした。");
+
+#if !UNITY_EDITOR
+
             SceneManager.LoadScene("StageSelectScene");
+
+#endif
             return;
         }
 
@@ -58,7 +68,7 @@ public class MapLoader : MonoBehaviour
         foreach (var objData in objects)
         {
             // Resources/Prefabs からプレハブを読み込み
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + objData.prefabName);
+            GameObject prefab = Resources.Load<GameObject>(PREFAB_FILE_PATH + objData.prefabName);
 
             // プレハブが見つからない場合はスキップ
             if (prefab == null)
@@ -68,7 +78,7 @@ public class MapLoader : MonoBehaviour
             }
 
             // JSONで指定された位置にオブジェクトを生成（Z座標は0固定）
-            Vector3 pos = new Vector3(objData.position.x, objData.position.y, 0f);
+            Vector3 pos = new Vector3(objData.position.x, objData.position.y, Z_POSITION_FIXED);
             GameObject instance = Instantiate(prefab, pos, Quaternion.identity);
 
             // 指定があれば親オブジェクトの子に設定
@@ -79,6 +89,6 @@ public class MapLoader : MonoBehaviour
         }
 
         // 配置完了のログを表示
-        Debug.Log($"マップ '{jsonFileName}' の読み込み完了！配置数: {objects.Count}");
+        Debug.Log($"マップ '{JSON_FILE_PATH}' の読み込み完了！配置数: {objects.Count}");
     }
 }

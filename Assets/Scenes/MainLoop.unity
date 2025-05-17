@@ -1190,6 +1190,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b3bc2aff96f304f9b0be404817537d, type: 3}
+--- !u!1 &1408544771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408544772}
+  m_Layer: 0
+  m_Name: StageWapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408544772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408544771}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.476758, y: 1.9669713, z: -1.9876167}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831853218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,7 +1234,7 @@ GameObject:
   - component: {fileID: 1831853222}
   m_Layer: 0
   m_Name: MapLoader
-  m_TagString: Untagged
+  m_TagString: MapLoader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1235,7 +1266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7083d81056a5ede4492396e2ab0c8e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentForObjects: {fileID: 0}
+  parentForObjects: {fileID: 1408544772}
   _stageNum: 1
 --- !u!114 &1831853222
 MonoBehaviour:
@@ -1849,3 +1880,4 @@ SceneRoots:
   - {fileID: 1293119784}
   - {fileID: 674622058}
   - {fileID: 134559255}
+  - {fileID: 1408544772}
