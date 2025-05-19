@@ -55,6 +55,8 @@ public class MapEditorWindow : EditorWindow
         // JSONからマップデータを読み込むボタン
         if (GUILayout.Button("JSONを読み込む"))
         {
+            DeleteStageObjects();
+
             // "MapLoader"タグがついたオブジェクトからMapLoaderコンポーネントを取得
             MapLoader mapLoader = GameObject.FindGameObjectWithTag("MapLoader").GetComponent<MapLoader>();
             mapLoader.LoadMapFromJson(); // マップデータの読み込み

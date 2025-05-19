@@ -36,13 +36,9 @@ public class MapEditorSceneHandler
 
         Vector3 pos = hit.point;
 
-        // スナップ設定が有効ならグリッドに合わせて位置調整
-        if (state.snapEnabled)
-        {
-            pos.x = Mathf.Round(pos.x / state.gridSize) * state.gridSize;
-            pos.y = Mathf.Round(pos.y / state.gridSize) * state.gridSize;
-            pos.z = 0f; // Z座標は固定
-        }
+        pos.x = Mathf.Round(pos.x / state.gridSize) * state.gridSize;
+        pos.y = Mathf.Round(pos.y / state.gridSize) * state.gridSize;
+        pos.z = 0f; // Z座標は固定
 
         // 配置モードか削除モードで処理を分岐
         if (state.currentMode == MapEditorState.EditMode.Place)

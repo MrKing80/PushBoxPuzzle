@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentForObjects: {fileID: 0}
-  _stageNum: 0
+  _stageNum: 4
 --- !u!4 &1796967877
 Transform:
   m_ObjectHideFlags: 0
