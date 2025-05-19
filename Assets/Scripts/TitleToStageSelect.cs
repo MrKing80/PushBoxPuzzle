@@ -8,6 +8,7 @@ public class TitleToStageSelect : MonoBehaviour
 {
     void Update()
     {
+        //いずれかのキーが入力されていればシーンを遷移する
         if(Input.anyKey)
         {
             SceneManager.LoadScene("StageSelectScene");

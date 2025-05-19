@@ -5,28 +5,30 @@ using UnityEngine.SceneManagement;
 public class PlayerUiManager : MonoBehaviour
 {
     [SerializeField] private PushBox _pushBox = default;        //PushBoxを格納する変数
-    [SerializeField] private Canvas _pauseCanvas = default;     //ポーズメニューのオブジェクトを格納する変数
+    private GameObject _pauseCanvas = default;                  //ポーズメニューのオブジェクトを格納する変数
     [SerializeField] private TMP_Text _showPower = default;     //押す力を表示するテキストUI
 
     private float _pushForce = 0f;  //箱を押す力
 
     private void Awake()
     {
+        _pauseCanvas = GameObject.FindGameObjectWithTag("Pause");
+
         //オブジェクトを非表示にする
-        _pauseCanvas.enabled = false;
+        _pauseCanvas.SetActive(false);
     }
 
 
     private void Update()
     {
         //キーが入力されたらオブジェクトの表示状態に応じて表示と非表示を切り替える
-        if (Input.GetKeyDown(KeyCode.Escape) && !_pauseCanvas.enabled)
+        if (Input.GetKeyDown(KeyCode.Escape) && !_pauseCanvas.activeSelf)
         {
-            _pauseCanvas.enabled = true;
+            _pauseCanvas.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && _pauseCanvas.enabled)
+        else if (Input.GetKeyDown(KeyCode.Escape) && _pauseCanvas.activeSelf)
         {
-            _pauseCanvas.enabled = false;
+            _pauseCanvas.SetActive(false);
         }
 
 
@@ -58,7 +60,7 @@ public class PlayerUiManager : MonoBehaviour
     /// </summary>
     public void CloseButton()
     {
-        _pauseCanvas.enabled = false;
+        _pauseCanvas.SetActive(false);
     }
 
     /// <summary>

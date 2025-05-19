@@ -18,7 +18,7 @@ public class MapEditorSceneHandler
     {
         Event guiEvent = Event.current;
 
-        // 左クリックかつプレハブが選択されている場合に処理
+        // 左クリックかつプレハブが選択されている場合、処理を行う
         if (!(guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && state.selectedPrefab != null))
         {
             return;
@@ -27,7 +27,7 @@ public class MapEditorSceneHandler
         // マウス位置からレイを生成
         Ray ray = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition);
 
-        // レイキャストで地面などにヒットした場合
+        // レイキャストで地面などにヒットしていない場合、処理を中断する
         if (!(Physics.Raycast(ray, out RaycastHit hit)))
         {
             return;
@@ -51,7 +51,7 @@ public class MapEditorSceneHandler
         }
         else
         {
-            EraseAt(pos); // オブジェクトを削除
+            DeleteAt(pos); // オブジェクトを削除
         }
 
         guiEvent.Use(); // イベントを消費
@@ -82,7 +82,7 @@ public class MapEditorSceneHandler
     }
 
     // 指定位置のオブジェクトを削除する処理
-    private void EraseAt(Vector3 position)
+    private void DeleteAt(Vector3 position)
     {
         foreach (var obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
