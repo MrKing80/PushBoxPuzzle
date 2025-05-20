@@ -52,7 +52,7 @@ public class MapEditorSceneHandler
 
         guiEvent.Use(); // イベントを消費
 
-        // カーソル下にプレビュー表示などの拡張したい
+        // TODO : カーソル下にプレビュー表示などの拡張したい
     }
 
     // 指定位置にプレハブを配置する処理
