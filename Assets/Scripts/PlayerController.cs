@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// プレイヤーの挙動を管理するクラス
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float _interval = 1f;                           // 押された状態の解除までの時間間隔
     private float _timer = 0;                               // 経過時間を記録するタイマー
 
+    private float _offsetAngle = 90;
     private bool _isPushed = false;                         // プレイヤーが箱を押している状態かどうか
 
     /// <summary>
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        this.gameObject.transform.localRotation = Quaternion.Euler(0, _offsetAngle, 0) ;
+
         _playerRigidoby = this.GetComponent<Rigidbody>();
 
         _playerMove.Rigidbody = _playerRigidoby;    //playerMoveにリジッドボディの情報を渡す

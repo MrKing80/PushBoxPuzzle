@@ -53,7 +53,7 @@ public class MapLoader : MonoBehaviour
         {
             Debug.LogError($"マップデータ {readFilePath}.json が Resources に見つかりませんでした。");
 
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
 
             SceneManager.LoadScene("StageSelectScene");
 
