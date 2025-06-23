@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class StageSelectButton : MonoBehaviour
 {
+    private const float WAIT_SEC = 0.5f;                //一定時間待機する時間を格納した変数
+    private const string SCENE_NAME = "MainLoop";       //遷移先のシーン名を格納した変数
+
     /// <summary>
     /// ボタンが押されたらコルーチンを呼び出すメソッド
     /// </summary>
@@ -24,8 +27,8 @@ public class StageSelectButton : MonoBehaviour
     {
         StageSelectManager.Instance.SetStageNumber(stageNum); // ステージ番号を管理クラスに渡す
 
-        yield return new WaitForSecondsRealtime(0.5f); // 少し待ってから遷移
+        yield return new WaitForSecondsRealtime(WAIT_SEC); // 少し待ってから遷移
 
-        SceneManager.LoadScene("MainLoop"); // メインループシーンに遷移
+        SceneManager.LoadScene(SCENE_NAME); // メインループシーンに遷移
     }
 }

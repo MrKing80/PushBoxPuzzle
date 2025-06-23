@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PlayerMove : MonoBehaviour
 {
-    private float _moveDirection = 0;                   // プレイヤーの移動する方向
-    private float _zLocalScale = 0;                     // プレイヤーのZ軸のローカルスケール
-    private float _invertedZLocalScale = 0;             // 反転時のプレイヤーのZ軸のローカルスケール
-    private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
     private Rigidbody _playerRigidbody = default;       // プレイヤーのRigidbody
+    private float _moveDirection = 0f;                  // プレイヤーの移動する方向
+    private float _zLocalScale = 0f;                    // プレイヤーのZ軸のローカルスケール
+    private float _invertedZLocalScale = 0f;            // 反転時のプレイヤーのZ軸のローカルスケール
+    private const int INVERTED_ORIENTATION = -1;        // 向きを反転する用の定数
 
     /// <summary>
     /// Rigidbodyの情報を受け取るプロパティ

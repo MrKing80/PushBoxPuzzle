@@ -5,19 +5,19 @@ using UnityEngine;
 /// </summary>
 public class PushBox : MonoBehaviour 
 {
-    private float _ratio = 5;                   // 押す力の最大値に対して最小値を決めるのに使用する値
-    private float _maxPushForce = 0;            // 押す力の最大値
-    private float _minPushForce = 0;            // 押す力の最小値
-    private float _currentPushForce = 0;        // 現在の押す力
-    private float _tmpPushForce = 0;            // 表示用などに一時保持する値
+    private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
+    private float _ratio = 5f;                  // 押す力の最大値に対して最小値を決めるのに使用する値
+    private float _maxPushForce = 0f;           // 押す力の最大値
+    private float _minPushForce = 0f;           // 押す力の最小値
+    private float _currentPushForce = 0f;       // 現在の押す力
+    private float _tmpPushForce = 0f;           // 表示用などに一時保持する値
 
-    private float _interval = 0.5f;             // 力を増加させる際のインターバル
-    private float _timer = 0;                   // 時間を計測する変数
+    private float _timer = 0f;                  // 時間を計測する変数
 
     private bool _isPushable = false;           // 箱を押すことができるかどうか
     private bool _isPushed = false;             // 箱が押されたかどうか
 
-    private RaycastHit _hitInfo = default;      // レイがヒットした相手オブジェクトの情報
+    private const float INTERVAL = 0.5f;        // 力を増加させる際のインターバル
 
     /// <summary>
     /// 外部から押された状態を取得・設定するプロパティ
@@ -43,7 +43,6 @@ public class PushBox : MonoBehaviour
     {
         get { return _tmpPushForce; }
     }
-
 
     private void Start()
     {
@@ -82,7 +81,7 @@ public class PushBox : MonoBehaviour
             _timer += Time.deltaTime;
 
             //一定時間経過したら
-            if (_timer >= _interval)
+            if (_timer >= INTERVAL)
             {
                 //押す力が最大値を超えたら最小値にリセット
                 if (_currentPushForce >= _maxPushForce)

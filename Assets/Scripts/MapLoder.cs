@@ -7,15 +7,14 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MapLoader : MonoBehaviour
 {
+    [SerializeField] private Transform parentForObjects;                    // 配置オブジェクトの親（空オブジェクトなど）
+    [SerializeField] private int _stageNum = DEFAULT_STAGE_NUM;             // 呼び出すステージの識別番号
+ 
     private const string JSON_FILE_PATH = "Json/StageData";         // Resources/Json/StageData.json を対象（ステージ番号で拡張）
     private const string PREFAB_FILE_PATH = "Prefabs/";             // prefabのオブジェクトファイルパス
     private const int DEFAULT_STAGE_NUM = 1;                        // ステージ番号のデフォルト値
     private const int EXCEPTION＿NUM = 0;                           // ステージ番号の例外の値
     private const float Z_POSITION_FIXED = 0f;
-
-
-    [SerializeField] private Transform parentForObjects;                    // 配置オブジェクトの親（空オブジェクトなど）
-    [SerializeField] private int _stageNum = DEFAULT_STAGE_NUM;             // 呼び出すステージの識別番号
 
     /// <summary>
     /// 起動時にマップデータを読み込む

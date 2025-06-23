@@ -1,21 +1,20 @@
 using UnityEngine;
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚ÌƒWƒƒƒ“ƒv‚ÉŠÖ‚·‚éƒNƒ‰ƒX
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¸ãƒ£ãƒ³ãƒ—ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class PlayerJump
-{ 
-    private float _jumpForce = 0;                       // ƒWƒƒƒ“ƒv—Í
-    private bool _isGround = true;                      // Ú’n‚µ‚Ä‚¢‚é‚©
-    private Rigidbody _playerRigidbody = default;       // ƒvƒŒƒCƒ„[‚ÌRigidbody
-    private RaycastHit _hitInfo = default;              // ƒŒƒC‚Ìƒqƒbƒg‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ìî•ñ‚ğŠi”[‚·‚é•Ï”
+{
+    private Rigidbody _playerRigidbody = default;       // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Rigidbody
+    private float _jumpForce = 0f;                       // ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
+    private bool _isGround = true;                      // æ¥åœ°ã—ã¦ã„ã‚‹ã‹
 
     /// <summary>
-    /// PlayerJump‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
-    /// Še•Ï”‚ğ‰Šú‰»‚·‚é
+    /// PlayerJumpã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// å„å¤‰æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹
     /// </summary>
-    /// <param name="playerRigidbody">PlayerController‚©‚çó‚¯æ‚Á‚½ƒvƒŒƒCƒ„[‚ÌRigidbody</param>
-    /// <param name="jumpForce">PlayerController‚©‚çó‚¯æ‚Á‚½ƒWƒƒƒ“ƒv—Í</param>
+    /// <param name="playerRigidbody">PlayerControllerã‹ã‚‰å—ã‘å–ã£ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Rigidbody</param>
+    /// <param name="jumpForce">PlayerControllerã‹ã‚‰å—ã‘å–ã£ãŸã‚¸ãƒ£ãƒ³ãƒ—åŠ›</param>
     public PlayerJump(Rigidbody playerRigidbody, float jumpForce)
     {
         _jumpForce = jumpForce;
@@ -23,30 +22,31 @@ public class PlayerJump
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚ÌƒWƒƒƒ“ƒv‚ÉŠÖ‚·‚éˆ—
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¸ãƒ£ãƒ³ãƒ—ã«é–¢ã™ã‚‹å‡¦ç†
     /// </summary>
-    /// <param name="playerPos">ƒvƒŒƒCƒ„[‚ÌˆÊ’u</param>
+    /// <param name="playerPos">ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®</param>
     public void PlayerJumping(Vector3 playerPos)
     {
-        float maxRayDistans = 0.1f;                             // ƒŒƒC‚ÌËo‹——£
-        Ray ray = new Ray(playerPos, Vector3.down);             //ƒŒƒC‚ğ”ò‚Î‚·
+        float maxRayDistans = 0.1f;                             // ãƒ¬ã‚¤ã®å°„å‡ºè·é›¢
+        Ray ray = new Ray(playerPos, Vector3.down);             //ãƒ¬ã‚¤ã‚’é£›ã°ã™
 
-        Debug.DrawRay(playerPos, Vector3.down * maxRayDistans, Color.red);      // ƒŒƒC‚ğ•`‰æ‚·‚é
+        Debug.DrawRay(playerPos, Vector3.down * maxRayDistans, Color.red);      // ãƒ¬ã‚¤ã‚’æç”»ã™ã‚‹
 
-        // ”ò‚Î‚µ‚½ƒŒƒC‚ª‰½‚©‚Éƒqƒbƒg‚µ‚Ä‚¢‚é‚©
-        if(Physics.Raycast(ray, out _hitInfo, maxRayDistans))
+        // é£›ã°ã—ãŸãƒ¬ã‚¤ãŒä½•ã‹ã«ãƒ’ãƒƒãƒˆã—ã¦ã„ã‚‹ã‹
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxRayDistans))
         {
-            _isGround = true;   //Ú’n‚µ‚Ä‚¢‚é
+            _isGround = true;   //æ¥åœ°ã—ã¦ã„ã‚‹
         }
         else
         {
-            _isGround = false;  //Ú’n‚µ‚Ä‚¢‚È‚¢
+            _isGround = false;  //æ¥åœ°ã—ã¦ã„ãªã„
         }
 
-        //WƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚ÄA‚È‚¨‚©‚ÂÚ’n‚µ‚Ä‚¢‚éƒWƒƒƒ“ƒv‚ğ‚·‚é
+        //Wã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã¦ã€ãªãŠã‹ã¤æ¥åœ°ã—ã¦ã„ã‚‹æ™‚ã‚¸ãƒ£ãƒ³ãƒ—ã‚’ã™ã‚‹
         if (Input.GetKeyDown(KeyCode.W) && _isGround)
         {
             _playerRigidbody.AddForce(0, _jumpForce, 0, ForceMode.Impulse);
         }
+
     }
 }

@@ -13,26 +13,27 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("プレイヤーの挙動に関するステータス")]
-    [SerializeField] private float _moveSpeed = 0;          // 移動速度
-    [SerializeField] private float _jumpForce = 0;          // ジャンプ力
-    [SerializeField] private float _maxPushForce = 0;       // 箱を押し出す最大の力
+    [SerializeField] private float _moveSpeed = 0f;             // 移動速度
+    [SerializeField] private float _jumpForce = 0f;             // ジャンプ力
+    [SerializeField] private float _maxPushForce = 0f;          // 箱を押し出す最大の力
 
-    [SerializeField] private LayerMask _boxLayer = default; //レイが衝突するレイヤー
+    [SerializeField] private LayerMask _boxLayer = default;     //レイが衝突するレイヤー
 
     private Rigidbody _playerRigidoby = default;
 
-    private float _interval = 1f;                           // 押された状態の解除までの時間間隔
-    private float _timer = 0;                               // 経過時間を記録するタイマー
+    private float _timer = 0f;                                  // 経過時間を記録するタイマー
 
-    private float _offsetAngle = 90;
-    private bool _isPushed = false;                         // プレイヤーが箱を押している状態かどうか
+    private bool _isPushed = false;                             // プレイヤーが箱を押している状態かどうか
+
+    private const float INTERVAL = 1f;                          // 押された状態の解除までの時間間隔
+    private const float OFFSET_ANGLE = 90f;
 
     /// <summary>
     /// /初期化を行う
     /// </summary>
     private void Awake()
     {
-        this.gameObject.transform.localRotation = Quaternion.Euler(0, _offsetAngle, 0) ;
+        this.gameObject.transform.localRotation = Quaternion.Euler(0, OFFSET_ANGLE, 0);
 
         _playerRigidoby = this.GetComponent<Rigidbody>();
 
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
             _timer += Time.deltaTime;
 
             //一定時間経過したら
-            if (_timer >= _interval)
+            if (_timer >= INTERVAL)
             {
                 _isPushed = false;
 

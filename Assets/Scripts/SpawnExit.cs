@@ -7,7 +7,7 @@ public class SpawnExit : MonoBehaviour
     private GameObject _exitDoor = default;         //出口オブジェクトを格納する変数
     private bool[] _isPresseds = default;           //それぞれのスイッチの状態を格納する配列
     private bool _isPassedTheCheck = false;         //すべてのスイッチが押されたかを判定する変数
-    private float _waitSec = 0.25f;                 //一定時間待機する時間を格納した変数
+    private const float WAIT_SEC = 0.25f;                 //一定時間待機する時間を格納した変数
 
     /// <summary>
     /// ゲーム開始時、初期化の設定を行う
@@ -86,13 +86,13 @@ public class SpawnExit : MonoBehaviour
                 _isPresseds[i] = _switches[i].GetComponent<ClearJudge>().GetIsPressed;
 
                 //一定時間待つ
-                yield return new WaitForSeconds(_waitSec);
+                yield return new WaitForSeconds(WAIT_SEC);
 
                 i++;
             }
 
             //一定時間待つ
-            yield return new WaitForSeconds(_waitSec);
+            yield return new WaitForSeconds(WAIT_SEC);
 
         }
     }

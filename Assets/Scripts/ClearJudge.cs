@@ -5,7 +5,7 @@ public class ClearJudge : MonoBehaviour
     [SerializeField] private LayerMask _boxLayer = default;     // レイがヒットするレイヤー
     private Rigidbody _hitRigidbody = default;                  // ヒットした相手のリジッドボディ
     private bool _isPressed = false;                            // スイッチが押されたか
-    private float _stopThreshold = 0.001f;                      // 速度がこの値以下なら止まっているとみなす
+    private const float STOP_THRESHOLD = 0.001f;                      // 速度がこの値以下なら止まっているとみなす
 
     /// <summary>
     /// スイッチの状態を返すプロパティ
@@ -42,7 +42,7 @@ public class ClearJudge : MonoBehaviour
             _hitRigidbody = _hitInfo.rigidbody;
 
             //ヒットした相手が止まっている、かつスイッチが押されていない場合
-            if (_hitRigidbody.linearVelocity.magnitude < _stopThreshold && !_isPressed)
+            if (_hitRigidbody.linearVelocity.magnitude < STOP_THRESHOLD && !_isPressed)
             {
                 //スイッチが押されている状態にする
                 _isPressed = true;

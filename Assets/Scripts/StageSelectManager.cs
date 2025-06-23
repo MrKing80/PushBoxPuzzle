@@ -8,7 +8,6 @@ public class StageSelectManager : MonoBehaviour
     // jsonファイルに対応した番号を格納する変数
     private int _stageNum = 0;
 
-
     /// <summary>
     /// ステージ番号を取得するメソッド
     /// </summary>

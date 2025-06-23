@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class PlayerUiManager : MonoBehaviour
 {
     [SerializeField] private PushBox _pushBox = default;        //PushBoxを格納する変数
-    private GameObject _pauseCanvas = default;                  //ポーズメニューのオブジェクトを格納する変数
     [SerializeField] private TMP_Text _showPower = default;     //押す力を表示するテキストUI
+    private GameObject _pauseCanvas = default;                  //ポーズメニューのオブジェクトを格納する変数
 
     private float _pushForce = 0f;  //箱を押す力
 
@@ -14,8 +14,11 @@ public class PlayerUiManager : MonoBehaviour
     {
         _pauseCanvas = GameObject.FindGameObjectWithTag("Pause");
 
-        //オブジェクトを非表示にする
-        _pauseCanvas.SetActive(false);
+        if (_pauseCanvas != null)
+        {
+            //オブジェクトを非表示にする
+            _pauseCanvas.SetActive(false);
+        }
     }
 
 
