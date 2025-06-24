@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,6 +54,11 @@ public class MapLoader : MonoBehaviour
             Debug.LogError($"マップデータ {readFilePath}.json が Resources に見つかりませんでした。");
 
 #if UNITY_EDITOR
+
+            if(!EditorApplication.isPlaying)
+            {
+                return ;
+            }
 
             SceneManager.LoadScene("StageSelectScene");
 
