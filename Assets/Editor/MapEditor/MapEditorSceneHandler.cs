@@ -19,7 +19,7 @@ public class MapEditorSceneHandler
         Event guiEvent = Event.current;
 
         // 左クリックかつプレハブが選択されている場合、処理を行う
-        if (!(guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && state.selectedPrefab != null))
+        if (!((guiEvent.type == EventType.MouseDrag || guiEvent.type == EventType.MouseDown)  && guiEvent.button == 0 && state.selectedPrefab != null))
         {
             return;
         }

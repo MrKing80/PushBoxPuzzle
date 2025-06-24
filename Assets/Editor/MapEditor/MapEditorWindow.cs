@@ -8,6 +8,7 @@ public class MapEditorWindow : EditorWindow
     private MapEditorState state;               // マップエディタの状態を保持するオブジェクト
     private MapEditorSceneHandler sceneHandler; // Sceneビューでの処理を担当するハンドラー
 
+    private const string PREFAB_FILE_PATH = "Assets/Resources/Prefabs/";
     // メニューに「Map 配置エディタ」を追加
     [MenuItem("Tools/Map 配置エディタ")]
     public static void Open()
@@ -36,7 +37,7 @@ public class MapEditorWindow : EditorWindow
         EditorGUILayout.LabelField("マップ配置ツール", EditorStyles.boldLabel);
 
         // プレハブの選択フィールド
-        state.selectedPrefab = (GameObject)EditorGUILayout.ObjectField("プレハブ", state.selectedPrefab, typeof(GameObject), false);
+        state.selectedPrefab = DrawPrefabPopup("プレハブ",state.selectedPrefab,PREFAB_FILE_PATH);
 
         // グリッドサイズの指定
         state.gridSize = EditorGUILayout.FloatField("マスサイズ", state.gridSize);
@@ -94,7 +95,7 @@ public class MapEditorWindow : EditorWindow
                 continue;
             }
 
-            // プレハブインスタンスのみ対象にする
+            // プレハブまたは"(Clone)"を含む名前のオブジェクトを対象
             if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab)
             {
                 MapObjectData data = new MapObjectData
@@ -132,4 +133,42 @@ public class MapEditorWindow : EditorWindow
             }
         }
     }
+
+    private GameObject DrawPrefabPopup(string label, GameObject selectedPrefab, string folderPath)
+    {
+        // 1. 指定フォルダのプレハブ検索
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { folderPath });
+
+        // 2. プレハブリストと名前リストに変換
+        List<GameObject> prefabList = new List<GameObject>();
+        List<string> prefabNames = new List<string>();
+
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (prefab != null)
+            {
+                prefabList.Add(prefab);
+                prefabNames.Add(prefab.name);
+            }
+        }
+
+        // 空なら選択不可として戻す
+        if (prefabList.Count == 0)
+        {
+            EditorGUILayout.HelpBox("指定フォルダにプレハブが見つかりません。", MessageType.Warning);
+            return null;
+        }
+
+        // 3. 現在のインデックスを取得
+        int selectedIndex = Mathf.Max(0, prefabList.IndexOf(selectedPrefab));
+
+        // 4. Popup表示
+        selectedIndex = EditorGUILayout.Popup(label, selectedIndex, prefabNames.ToArray());
+
+        // 5. 選ばれたプレハブを返す
+        return prefabList[selectedIndex];
+    }
+
 }
