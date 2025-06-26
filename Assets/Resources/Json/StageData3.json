@@ -3,21 +3,84 @@
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -5.0,
+                "x": -10.0,
+                "y": 3.0
+            }
+        },
+        {
+            "prefabName": "Exit",
+            "position": {
+                "x": -13.0,
+                "y": 4.75
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 8.0,
                 "y": -3.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": 13.0,
+                "x": -11.0,
+                "y": -5.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -3.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 3.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -8.0,
+                "y": 3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 4.0,
+                "y": -1.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -10.0,
+                "y": -6.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -13.0,
+                "y": -4.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 10.0,
                 "y": -3.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": 1.0,
+                "x": -7.0,
                 "y": -3.0
             }
         },
@@ -31,78 +94,43 @@
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": 12.0,
+                "x": -5.0,
                 "y": -3.0
+            }
+        },
+        {
+            "prefabName": "Box",
+            "position": {
+                "x": 4.0,
+                "y": 0.0
+            }
+        },
+        {
+            "prefabName": "PlayerSpawner",
+            "position": {
+                "x": 5.0,
+                "y": -5.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -4.0,
+                "y": 0.0
+            }
+        },
+        {
+            "prefabName": "Switch",
+            "position": {
+                "x": 12.0,
+                "y": -2.4000000953674318
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
                 "x": -8.0,
-                "y": 3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -2.0,
-                "y": -2.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -13.0,
-                "y": -4.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 3.0,
-                "y": -1.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -6.0,
-                "y": 2.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 9.0,
                 "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -14.0,
-                "y": -4.0
-            }
-        },
-        {
-            "prefabName": "Switch",
-            "position": {
-                "x": -9.0,
-                "y": 3.5999999046325685
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 4.0,
-                "y": -1.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 6.0,
-                "y": -1.0
             }
         },
         {
@@ -115,64 +143,15 @@
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": 14.0,
+                "x": -6.0,
                 "y": -3.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -8.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -9.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 8.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -10.0,
-                "y": 3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -4.0,
-                "y": 0.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -3.0,
+                "x": 5.0,
                 "y": -1.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -11.0,
-                "y": 3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 7.0,
-                "y": -2.0
             }
         },
         {
@@ -185,112 +164,21 @@
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -13.0,
-                "y": 3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 11.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -7.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 0.0,
+                "x": -2.0,
                 "y": -2.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -10.0,
-                "y": -6.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 10.0,
-                "y": -3.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -5.0,
-                "y": 1.0
-            }
-        },
-        {
-            "prefabName": "Box",
-            "position": {
-                "x": -6.0,
-                "y": -6.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -11.0,
-                "y": -5.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": -12.0,
-                "y": -4.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 5.0,
-                "y": -1.0
-            }
-        },
-        {
-            "prefabName": "FloorBlock",
-            "position": {
-                "x": 2.0,
-                "y": -4.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
                 "x": -9.0,
-                "y": 3.0
-            }
-        },
-        {
-            "prefabName": "Switch",
-            "position": {
-                "x": 12.0,
-                "y": -2.4000000953674318
-            }
-        },
-        {
-            "prefabName": "Box",
-            "position": {
-                "x": -7.0,
-                "y": -2.0
+                "y": -3.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -6.0,
+                "x": 11.0,
                 "y": -3.0
             }
         },
@@ -302,24 +190,80 @@
             }
         },
         {
-            "prefabName": "Exit",
+            "prefabName": "FloorBlock",
             "position": {
-                "x": -13.0,
-                "y": 4.75
+                "x": 6.0,
+                "y": -1.0
             }
         },
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -12.0,
+                "x": -11.0,
                 "y": 3.0
             }
         },
         {
-            "prefabName": "Box",
+            "prefabName": "FloorBlock",
             "position": {
-                "x": 4.0,
-                "y": 0.0
+                "x": -9.0,
+                "y": 3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -6.0,
+                "y": 2.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 12.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 9.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 14.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -14.0,
+                "y": 3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 7.0,
+                "y": -2.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 1.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 2.0,
+                "y": -4.0
             }
         },
         {
@@ -332,8 +276,78 @@
         {
             "prefabName": "FloorBlock",
             "position": {
-                "x": -14.0,
+                "x": 13.0,
+                "y": -3.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -12.0,
                 "y": 3.0
+            }
+        },
+        {
+            "prefabName": "Switch",
+            "position": {
+                "x": -9.0,
+                "y": 3.5999999046325685
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -13.0,
+                "y": 3.0
+            }
+        },
+        {
+            "prefabName": "Cube",
+            "position": {
+                "x": 4.109899997711182,
+                "y": -5.132532119750977
+            }
+        },
+        {
+            "prefabName": "Box",
+            "position": {
+                "x": -6.0,
+                "y": -6.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -14.0,
+                "y": -4.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -5.0,
+                "y": 1.0
+            }
+        },
+        {
+            "prefabName": "Box",
+            "position": {
+                "x": -7.0,
+                "y": -2.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": -12.0,
+                "y": -4.0
+            }
+        },
+        {
+            "prefabName": "FloorBlock",
+            "position": {
+                "x": 0.0,
+                "y": -2.0
             }
         }
     ]

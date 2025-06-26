@@ -60,6 +60,7 @@ public class MapEditorSceneHandler
     {
         // すでに同じ位置にオブジェクトがある場合は配置しない
         var existing = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
         foreach (var obj in existing)
         {
             if (Vector3.Distance(obj.transform.position, position) < 0.1f)
@@ -82,6 +83,11 @@ public class MapEditorSceneHandler
     {
         foreach (var obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
+            if(obj.CompareTag("MapLoader") || obj.CompareTag("GameController"))
+            {
+                continue;
+            }
+
             // 対象位置のオブジェクトを発見したら削除
             if (Vector3.Distance(obj.transform.position, position) < 0.1f)
             {

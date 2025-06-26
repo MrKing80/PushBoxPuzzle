@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 1591123605}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentForObjects: {fileID: 0}
-  _stageNum: 0
+  _stageNum: 1
 --- !u!4 &1796967877
 Transform:
   m_ObjectHideFlags: 0
@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 5688168466117775873}
   m_Layer: 3
   m_Name: StageFrameBase
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// プレイヤーの移動に関するクラス

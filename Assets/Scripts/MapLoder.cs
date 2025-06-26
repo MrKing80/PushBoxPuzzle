@@ -94,6 +94,6 @@ public class MapLoader : MonoBehaviour
         }
 
         // 配置完了のログを表示
-        Debug.Log($"マップ '{JSON_FILE_PATH}' の読み込み完了！配置数: {objects.Count}");
+        Debug.Log($"マップ '{readFilePath}' の読み込み完了！配置数: {objects.Count}");
     }
 }

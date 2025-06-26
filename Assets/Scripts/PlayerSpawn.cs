@@ -7,5 +7,7 @@ public class PlayerSpawn : MonoBehaviour
     private void Awake()
     {
         Instantiate(_player,this.transform.position, Quaternion.identity);
+
+        this.gameObject.SetActive(false);
     }
 }

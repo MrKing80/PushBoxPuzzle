@@ -8,8 +8,12 @@ public class MapEditorWindow : EditorWindow
     private MapEditorState state;               // マップエディタの状態を保持するオブジェクト
     private MapEditorSceneHandler sceneHandler; // Sceneビューでの処理を担当するハンドラー
 
-    private const string PREFAB_FILE_PATH = "Assets/Resources/Prefabs/";
-    // メニューに「Map 配置エディタ」を追加
+    private const int PREVIEW_SIZE = 256;
+    private const string PREFAB_FILE_PATH = "Assets/Resources/Prefabs/";    //プレハブが保存されているフォルダのパス
+    
+    /// <summary>
+    /// メニューに「Map 配置エディタ」を追加
+    /// </summary>
     [MenuItem("Tools/Map 配置エディタ")]
     public static void Open()
     {
@@ -17,7 +21,9 @@ public class MapEditorWindow : EditorWindow
         GetWindow<MapEditorWindow>("Map 配置エディタ");
     }
 
-    // ウィンドウが有効化されたときに呼び出される
+    /// <summary>
+    /// ウィンドウが有効化されたときに呼び出される
+    /// </summary>
     private void OnEnable()
     {
         state = new MapEditorState();                           // エディタ状態の初期化
@@ -25,13 +31,17 @@ public class MapEditorWindow : EditorWindow
         SceneView.duringSceneGui += sceneHandler.OnSceneGUI;    // SceneGUIイベントに登録
     }
 
-    // ウィンドウが無効化されたときに呼び出される
+    /// <summary>
+    /// ウィンドウが無効化されたときに呼び出される
+    /// </summary>
     private void OnDisable()
     {
         SceneView.duringSceneGui -= sceneHandler.OnSceneGUI; // SceneGUIイベントから登録解除
     }
 
-    // エディタウィンドウのGUIを描画する
+    /// <summary>
+    /// エディタウィンドウのGUIを描画する
+    /// </summary>
     private void OnGUI()
     {
         EditorGUILayout.LabelField("マップ配置ツール", EditorStyles.boldLabel);
@@ -68,9 +78,27 @@ public class MapEditorWindow : EditorWindow
         {
             DeleteStageObjects();
         }
+
+        // プレハブのプレビュー表示
+        if (state.selectedPrefab != null)
+        {
+            Texture2D previewTex = AssetPreview.GetAssetPreview(state.selectedPrefab);
+
+            if (previewTex != null)
+            {
+                GUILayout.Label(previewTex, GUILayout.Width(PREVIEW_SIZE), GUILayout.Height(PREVIEW_SIZE));
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("プレビューを生成中または取得できません。", MessageType.Info);
+            }
+        }
+
     }
 
-    // 現在のマップオブジェクトをJSON形式で保存
+    /// <summary>
+    /// 現在のマップオブジェクトをJSON形式で保存
+    /// </summary>
     private void SaveMapToJson()
     {
         // ファイル保存ダイアログを表示
@@ -96,7 +124,7 @@ public class MapEditorWindow : EditorWindow
             }
 
             // プレハブまたは"(Clone)"を含む名前のオブジェクトを対象
-            if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab)
+            if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab || obj.name.Contains("Clone"))
             {
                 MapObjectData data = new MapObjectData
                 {
@@ -114,22 +142,26 @@ public class MapEditorWindow : EditorWindow
         Debug.Log($"マップを保存しました！ ({path})");
     }
 
-    // シーン内のマップオブジェクトをすべて削除
+    /// <summary>
+    /// シーン内のマップオブジェクトをすべて削除
+    /// </summary>
     private void DeleteStageObjects()
     {
-        // シーン内のすべてのGameObjectを走査
+        List<GameObject> deleteList = new();
+
         foreach (GameObject obj in GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
-            // プレイヤーオブジェクトは除外
-            if (obj.CompareTag("Player"))
-            {
-                continue;
-            }
-
-            // プレハブまたは"(Clone)"を含む名前のオブジェクトを対象に削除
             if (PrefabUtility.GetPrefabAssetType(obj) != PrefabAssetType.NotAPrefab || obj.name.Contains("Clone"))
             {
-                Undo.DestroyObjectImmediate(obj); // Undo対応で削除
+                deleteList.Add(obj);
+            }
+        }
+
+        foreach (GameObject obj in deleteList)
+        {
+            if (obj != null) // nullチェックは絶対入れる
+            {
+                Undo.DestroyObjectImmediate(obj);
             }
         }
     }
@@ -142,6 +174,9 @@ public class MapEditorWindow : EditorWindow
         // 2. プレハブリストと名前リストに変換
         List<GameObject> prefabList = new List<GameObject>();
         List<string> prefabNames = new List<string>();
+
+        prefabList.Insert(0,null);
+        prefabNames.Insert(0, "-- None --");
 
         foreach (string guid in guids)
         {
