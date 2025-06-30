@@ -176,10 +176,10 @@ public class MapEditorWindow : EditorWindow
 
     private GameObject DrawPrefabPopup(string label, GameObject selectedPrefab, string folderPath)
     {
-        // 1. 指定フォルダのプレハブ検索
+        // 指定フォルダのプレハブ検索
         string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { folderPath });
 
-        // 2. プレハブリストと名前リストに変換
+        // プレハブリストと名前リストに変換
         List<GameObject> prefabList = new List<GameObject>();
         List<string> prefabNames = new List<string>();
 
@@ -204,13 +204,13 @@ public class MapEditorWindow : EditorWindow
             return null;
         }
 
-        // 3. 現在のインデックスを取得
+        // 現在のインデックスを取得
         int selectedIndex = Mathf.Max(0, prefabList.IndexOf(selectedPrefab));
 
-        // 4. Popup表示
+        // Popup表示
         selectedIndex = EditorGUILayout.Popup(label, selectedIndex, prefabNames.ToArray());
 
-        // 5. 選ばれたプレハブを返す
+        // 選ばれたプレハブを返す
         return prefabList[selectedIndex];
     }
 
