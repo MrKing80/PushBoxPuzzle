@@ -8,6 +8,8 @@ public class MapEditorWindow : EditorWindow
     private MapEditorState state;               // マップエディタの状態を保持するオブジェクト
     private MapEditorSceneHandler sceneHandler; // Sceneビューでの処理を担当するハンドラー
 
+    private string[] modeDisplayNames = { "配置モード", "削除モード" };   // モードの表示名リスト
+
     private const int PREVIEW_SIZE = 256;
     private const string PREFAB_FILE_PATH = "Assets/Resources/Prefabs/";    //プレハブが保存されているフォルダのパス
     
@@ -52,8 +54,14 @@ public class MapEditorWindow : EditorWindow
         // グリッドサイズの指定
         state.gridSize = EditorGUILayout.FloatField("マスサイズ", state.gridSize);
 
-        // 配置モードと削除モードの切り替え
-        state.currentMode = (MapEditorState.EditMode)EditorGUILayout.EnumPopup("モード選択", state.currentMode);
+        // 現在のEnumのインデックスを取得
+        int selectedIndex = (int)state.currentMode;
+
+        // 日本語で表示された選択肢をPopupで描画
+        selectedIndex = EditorGUILayout.Popup("モード選択", selectedIndex, modeDisplayNames);
+
+        // 選択インデックスをEnumに変換して代入
+        state.currentMode = (MapEditorState.EditMode)selectedIndex;
 
         EditorGUILayout.Space();
 
