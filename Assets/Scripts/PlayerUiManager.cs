@@ -57,20 +57,4 @@ public class PlayerUiManager : MonoBehaviour
             _showPower.text = ""; // 力が0以下の場合は非表示
         }
     }
-
-    /// <summary>
-    /// ポーズメニューを閉じる
-    /// </summary>
-    public void CloseButton()
-    {
-        _pauseCanvas.SetActive(false);
-    }
-
-    /// <summary>
-    /// タイトルへ戻る
-    /// </summary>
-    public void ExitButton()
-    {
-        SceneManager.LoadScene("TitleScene");
-    }
 }
